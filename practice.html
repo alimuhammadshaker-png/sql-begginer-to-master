@@ -18,6 +18,7 @@
       --editor-bg: #1e2130;
       --editor-text: #e6e9f2;
       --editor-border: #333752;
+      --learn-bg: #f8f9fc;
     }
 
     * {
@@ -31,13 +32,23 @@
       color: var(--text);
     }
 
+    /* ─── HEADER ─── */
     header {
       background: linear-gradient(135deg, #2a52c0, #3a6df0);
       color: #fff;
-      padding: 16px 24px;
+      padding: 12px 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    header .left {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
     }
 
     header h1 {
@@ -45,22 +56,59 @@
       font-size: 22px;
     }
 
+    header .nav-links {
+      display: flex;
+      gap: 0.8rem;
+      align-items: center;
+    }
+
+    header .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      opacity: 0.85;
+      padding: 4px 12px;
+      border-radius: 20px;
+      transition: opacity 0.2s, background 0.2s;
+    }
+
+    header .nav-links a:hover {
+      opacity: 1;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    header .nav-links a.active {
+      opacity: 1;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
     header .tag {
       font-size: 13px;
       opacity: .85;
     }
 
-    .layout {
-      display: flex;
-      min-height: calc(100vh - 62px);
+    #progressTag {
+      font-size: 13px;
+      opacity: .9;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 4px 14px;
+      border-radius: 20px;
     }
 
+    /* ─── LAYOUT ─── */
+    .layout {
+      display: flex;
+      min-height: calc(100vh - 70px);
+    }
+
+    /* ─── SIDEBAR ─── */
     aside {
       width: 280px;
       background: var(--panel);
       border-right: 1px solid var(--border);
       overflow-y: auto;
       padding: 10px;
+      flex-shrink: 0;
     }
 
     aside h3 {
@@ -99,6 +147,7 @@
       border-radius: 5px;
       cursor: pointer;
       color: #3a4256;
+      transition: background 0.15s;
     }
 
     .cat-group li button:hover {
@@ -110,12 +159,125 @@
       color: #fff;
     }
 
+    /* ─── MAIN CONTENT ─── */
     main {
       flex: 1;
       padding: 20px 28px;
       overflow-y: auto;
+      min-width: 0;
     }
 
+    /* ─── HYBRID LAYOUT: Learn + Practice ─── */
+       /* Learn panel now uses full width - no grid needed */
+       /* Learn panel and dataset panel now use full width */
+    #learnPanel {
+      margin-bottom: 20px;
+    }
+    
+    #datasetPanel {
+      margin-bottom: 20px;
+    }
+    #learnPanel h3 {
+      font-size: 15px;
+      margin: 0 0 4px 0;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    #learnPanel .learn-topic {
+      font-size: 20px;
+      font-weight: 700;
+      margin: 4px 0 10px 0;
+      color: var(--text);
+    }
+
+    #learnPanel .learn-section {
+      margin-bottom: 14px;
+    }
+
+    #learnPanel .learn-section h4 {
+      font-size: 13px;
+      font-weight: 600;
+      margin: 0 0 4px 0;
+      color: #3a4256;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    #learnPanel .learn-section p,
+    #learnPanel .learn-section li {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #3a4256;
+      margin: 0 0 6px 0;
+    }
+
+    #learnPanel .learn-section ul {
+      padding-left: 20px;
+      margin: 4px 0 8px 0;
+    }
+
+    #learnPanel .learn-section code {
+      background: #eef1f7;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+      font-family: 'Consolas', monospace;
+      color: #2a52c0;
+    }
+
+    #learnPanel .learn-example {
+      background: var(--editor-bg);
+      color: var(--editor-text);
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 13px;
+      line-height: 1.6;
+      overflow-x: auto;
+      margin: 6px 0;
+      border: 1px solid var(--editor-border);
+    }
+
+    #learnPanel .learn-example .comment {
+      color: #6a7a8a;
+    }
+
+    #learnPanel .learn-example .keyword {
+      color: #ff79c6;
+    }
+
+    #learnPanel .learn-example .string {
+      color: #f1fa8c;
+    }
+
+    #learnPanel .learn-example .func {
+      color: #50fa7b;
+    }
+
+    #learnPanel .learn-example .table {
+      color: #8be9fd;
+    }
+
+    #learnPanel .learn-output {
+      background: #f8f9fc;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-family: 'Consolas', monospace;
+      font-size: 13px;
+      color: var(--text);
+      overflow-x: auto;
+      margin: 6px 0;
+    }
+
+    .learn-toggle {
+      display: none;
+    }
+
+    /* ─── DATASET PANEL ─── */
     #datasetPanel {
       background: var(--panel);
       border: 1px solid var(--border);
@@ -140,6 +302,11 @@
       font-size: 13px;
       font-weight: 600;
       color: #495066;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+
+    .tabs button:hover {
+      background: #e4e8f0;
     }
 
     .tabs button.active {
@@ -163,6 +330,7 @@
 
     table th {
       background: #eef1f7;
+      font-weight: 600;
     }
 
     .table-wrap {
@@ -171,6 +339,7 @@
       border-radius: 6px;
     }
 
+    /* ─── EXERCISE PANEL ─── */
     #exercisePanel {
       background: var(--panel);
       border: 1px solid var(--border);
@@ -210,6 +379,12 @@
       font-size: 14px;
       resize: vertical;
       line-height: 1.5;
+      transition: border-color 0.2s;
+    }
+
+    textarea#sqlInput:focus {
+      outline: none;
+      border-color: var(--accent);
     }
 
     .btnrow {
@@ -219,11 +394,6 @@
       flex-wrap: wrap;
     }
 
-    .btn {
-      text-decoration: none;
-      padding: 9px 16px;
-    }
-
     .btnrow button {
       padding: 9px 16px;
       border-radius: 7px;
@@ -231,6 +401,11 @@
       font-size: 14px;
       font-weight: 600;
       cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btnrow button:active {
+      transform: scale(0.97);
     }
 
     #runBtn {
@@ -248,11 +423,20 @@
       border: 1px solid #f0dca0;
     }
 
+    #hintBtn:hover {
+      background: #f0e0b0;
+    }
+
     #prevBtn,
     #nextBtn {
       background: #eef1f7;
       color: #333a4d;
       border: 1px solid var(--border);
+    }
+
+    #prevBtn:hover,
+    #nextBtn:hover {
+      background: #e4e8f0;
     }
 
     #hintBox {
@@ -293,6 +477,7 @@
       color: #8891a5;
     }
 
+    /* ─── SCROLLBAR ─── */
     ::-webkit-scrollbar {
       width: 9px;
       height: 9px;
@@ -302,30 +487,127 @@
       background: #c7cede;
       border-radius: 5px;
     }
+
+    ::-webkit-scrollbar-track {
+      background: #f4f6f9;
+    }
+
+    /* ─── RESPONSIVE ─── */
+       @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 12px 16px;
+      }
+
+      header .left {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+      }
+
+      header .nav-links {
+        flex-wrap: wrap;
+        gap: 0.4rem;
+      }
+
+      header .nav-links a {
+        font-size: 13px;
+        padding: 4px 10px;
+      }
+
+      #progressTag {
+        align-self: flex-start;
+      }
+
+      main {
+        padding: 12px 14px;
+      }
+
+      aside {
+        width: 200px;
+      }
+
+      #learnPanel {
+        max-height: 400px;
+        overflow-y: auto;
+      }
+
+      #learnPanel #learnContent {
+        padding: 14px !important;
+      }
+
+      #exercisePanel {
+        padding: 16px;
+      }
+
+      textarea#sqlInput {
+        min-height: 90px;
+        font-size: 13px;
+      }
+    }
+
+        @media (max-width: 480px) {
+      aside {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        max-height: 300px;
+      }
+
+      .layout {
+        flex-direction: column;
+      }
+
+      #learnPanel {
+        max-height: 300px;
+        overflow-y: auto;
+      }
+
+      #learnPanel #learnContent {
+        padding: 12px !important;
+      }
+    }
   </style>
 </head>
 
 <body>
 
   <header>
-    <div>
-      <h1>LearnSQL Practice</h1>
-      <a class="btn" href="index.html">Home page</a>
-      <a class="btn" href="learn.html">Learn SQL</a>
-      <div class="tag">150+ hands-on SQL exercises — beginner to advanced</div>
+    <div class="left">
+      <h1>📘 LearnSQL Practice</h1>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="learn.html">Learn</a>
+        <a href="practice.html" class="active">Practice</a>
+      </div>
+      <div class="tag">150+ hands-on exercises</div>
     </div>
-    <div class="tag" id="progressTag">0 / 0 exercises attempted</div>
+    <div id="progressTag">0 / 0 exercises attempted</div>
   </header>
 
   <div class="layout">
     <aside id="sidebar"></aside>
 
     <main>
-      <section id="datasetPanel">
+      <!-- HYBRID: Learn + Practice Grid -->
+           <!-- LEARN PANEL - Now full width above everything -->
+           <!-- LEARN PANEL - Full width above everything -->
+      <section id="learnPanel" style="margin-bottom: 20px;">
+        <h3 style="font-size: 15px; margin: 0 0 4px 0; color: var(--accent); display: flex; align-items: center; gap: 8px;">📖 Learn</h3>
+        <div id="learnContent" style="background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px;">
+          <div class="learn-topic" id="learnTopic" style="font-size: 20px; font-weight: 700; margin: 4px 0 10px 0; color: var(--text);">SELECT Basics</div>
+          <div id="learnBody"></div>
+        </div>
+      </section>
+
+      <!-- DATASET PANEL - Shows table data -->
+      <section id="datasetPanel" style="background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; margin-bottom: 20px;">
         <div class="tabs" id="datasetTabs"></div>
         <div class="table-wrap" id="datasetTableWrap"></div>
       </section>
-
+      
+      <!-- EXERCISE PANEL -->
       <section id="exercisePanel">
         <div id="exMeta"></div>
         <h2 id="exTitle"></h2>
@@ -349,16 +631,26 @@ SELECT ..."></textarea>
     /* ============================== DATASETS ============================== */
     const datasets = {
       employees: [
-        { id: 1, first_name: "John", last_name: "Smith", department_id: 1, salary: 65000, hire_date: "2019-03-15", manager_id: 5, email: "john.smith@co.com", city: "New York" },
-        { id: 2, first_name: "Sara", last_name: "Johnson", department_id: 2, salary: 72000, hire_date: "2018-07-01", manager_id: 5, email: "sara.johnson@co.com", city: "Boston" },
-        { id: 3, first_name: "Mike", last_name: "Brown", department_id: 1, salary: 58000, hire_date: "2020-01-10", manager_id: 1, email: "mike.brown@co.com", city: "New York" },
-        { id: 4, first_name: "Lisa", last_name: "Davis", department_id: 3, salary: 81000, hire_date: "2017-11-23", manager_id: 5, email: "lisa.davis@co.com", city: "Chicago" },
-        { id: 5, first_name: "Robert", last_name: "Wilson", department_id: 1, salary: 95000, hire_date: "2015-06-05", manager_id: null, email: "robert.wilson@co.com", city: "New York" },
-        { id: 6, first_name: "Emily", last_name: "Clark", department_id: 2, salary: 67000, hire_date: "2019-09-12", manager_id: 2, email: "emily.clark@co.com", city: "Boston" },
-        { id: 7, first_name: "David", last_name: "Lee", department_id: 4, salary: 73000, hire_date: "2021-02-18", manager_id: 5, email: "david.lee@co.com", city: "Austin" },
-        { id: 8, first_name: "Anna", last_name: "White", department_id: 3, salary: 62000, hire_date: "2020-08-30", manager_id: 4, email: "anna.white@co.com", city: "Chicago" },
-        { id: 9, first_name: "James", last_name: "Taylor", department_id: 4, salary: 88000, hire_date: "2016-04-22", manager_id: 5, email: "james.taylor@co.com", city: "Austin" },
-        { id: 10, first_name: "Maria", last_name: "Garcia", department_id: 2, salary: 59000, hire_date: "2022-05-14", manager_id: 2, email: "maria.garcia@co.com", city: "Boston" }
+        { id: 1, first_name: "John", last_name: "Smith", department_id: 1, salary: 65000, hire_date: "2019-03-15",
+          manager_id: 5, email: "john.smith@co.com", city: "New York" },
+        { id: 2, first_name: "Sara", last_name: "Johnson", department_id: 2, salary: 72000, hire_date: "2018-07-01",
+          manager_id: 5, email: "sara.johnson@co.com", city: "Boston" },
+        { id: 3, first_name: "Mike", last_name: "Brown", department_id: 1, salary: 58000, hire_date: "2020-01-10",
+          manager_id: 1, email: "mike.brown@co.com", city: "New York" },
+        { id: 4, first_name: "Lisa", last_name: "Davis", department_id: 3, salary: 81000, hire_date: "2017-11-23",
+          manager_id: 5, email: "lisa.davis@co.com", city: "Chicago" },
+        { id: 5, first_name: "Robert", last_name: "Wilson", department_id: 1, salary: 95000, hire_date: "2015-06-05",
+          manager_id: null, email: "robert.wilson@co.com", city: "New York" },
+        { id: 6, first_name: "Emily", last_name: "Clark", department_id: 2, salary: 67000, hire_date: "2019-09-12",
+          manager_id: 2, email: "emily.clark@co.com", city: "Boston" },
+        { id: 7, first_name: "David", last_name: "Lee", department_id: 4, salary: 73000, hire_date: "2021-02-18",
+          manager_id: 5, email: "david.lee@co.com", city: "Austin" },
+        { id: 8, first_name: "Anna", last_name: "White", department_id: 3, salary: 62000, hire_date: "2020-08-30",
+          manager_id: 4, email: "anna.white@co.com", city: "Chicago" },
+        { id: 9, first_name: "James", last_name: "Taylor", department_id: 4, salary: 88000, hire_date: "2016-04-22",
+          manager_id: 5, email: "james.taylor@co.com", city: "Austin" },
+        { id: 10, first_name: "Maria", last_name: "Garcia", department_id: 2, salary: 59000, hire_date: "2022-05-14",
+          manager_id: 2, email: "maria.garcia@co.com", city: "Boston" }
       ],
       departments: [
         { id: 1, name: "Engineering", location: "New York", budget: 500000, manager_id: 5 },
@@ -381,20 +673,30 @@ SELECT ..."></textarea>
         { id: 12, employee_id: 7, product_id: 102, sale_date: "2023-06-12", amount: 1100, quantity: 2, region: "South" }
       ],
       inventory: [
-        { id: 101, product_name: "Widget-A", category: "Hardware", quantity: 150, unit_price: 25.00, warehouse: "W1", restock_date: "2023-06-01" },
-        { id: 102, product_name: "Widget-B", category: "Hardware", quantity: 80, unit_price: 40.00, warehouse: "W2", restock_date: "2023-05-15" },
-        { id: 103, product_name: "Gadget-X", category: "Electronics", quantity: 200, unit_price: 15.50, warehouse: "W1", restock_date: "2023-06-10" },
-        { id: 104, product_name: "Gadget-Y", category: "Electronics", quantity: 12, unit_price: 120.00, warehouse: "W3", restock_date: "2023-06-20" },
-        { id: 105, product_name: "Tool-Z", category: "Tools", quantity: 60, unit_price: 8.75, warehouse: "W2", restock_date: "2023-05-28" },
-        { id: 106, product_name: "Widget-C", category: "Hardware", quantity: 300, unit_price: 22.00, warehouse: "W1", restock_date: "2023-06-05" },
-        { id: 107, product_name: "Gadget-Z", category: "Electronics", quantity: 5, unit_price: 200.00, warehouse: "W3", restock_date: "2023-06-25" },
-        { id: 108, product_name: "Tool-A", category: "Tools", quantity: 90, unit_price: 12.00, warehouse: "W2", restock_date: "2023-05-30" },
-        { id: 109, product_name: "Widget-D", category: "Hardware", quantity: 45, unit_price: 30.00, warehouse: "W1", restock_date: "2023-06-08" },
-        { id: 110, product_name: "Gadget-W", category: "Electronics", quantity: 130, unit_price: 65.00, warehouse: "W3", restock_date: "2023-06-15" }
+        { id: 101, product_name: "Widget-A", category: "Hardware", quantity: 150, unit_price: 25.00, warehouse: "W1",
+          restock_date: "2023-06-01" },
+        { id: 102, product_name: "Widget-B", category: "Hardware", quantity: 80, unit_price: 40.00, warehouse: "W2",
+          restock_date: "2023-05-15" },
+        { id: 103, product_name: "Gadget-X", category: "Electronics", quantity: 200, unit_price: 15.50, warehouse: "W1",
+          restock_date: "2023-06-10" },
+        { id: 104, product_name: "Gadget-Y", category: "Electronics", quantity: 12, unit_price: 120.00, warehouse: "W3",
+          restock_date: "2023-06-20" },
+        { id: 105, product_name: "Tool-Z", category: "Tools", quantity: 60, unit_price: 8.75, warehouse: "W2",
+          restock_date: "2023-05-28" },
+        { id: 106, product_name: "Widget-C", category: "Hardware", quantity: 300, unit_price: 22.00, warehouse: "W1",
+          restock_date: "2023-06-05" },
+        { id: 107, product_name: "Gadget-Z", category: "Electronics", quantity: 5, unit_price: 200.00, warehouse: "W3",
+          restock_date: "2023-06-25" },
+        { id: 108, product_name: "Tool-A", category: "Tools", quantity: 90, unit_price: 12.00, warehouse: "W2",
+          restock_date: "2023-05-30" },
+        { id: 109, product_name: "Widget-D", category: "Hardware", quantity: 45, unit_price: 30.00, warehouse: "W1",
+          restock_date: "2023-06-08" },
+        { id: 110, product_name: "Gadget-W", category: "Electronics", quantity: 130, unit_price: 65.00, warehouse: "W3",
+          restock_date: "2023-06-15" }
       ]
     };
 
-    /* ============================== HELPERS  = ============================== */
+    /* ============================== HELPERS ============================== */
     function pick(rows, cols) {
       return rows.map(r => {
         const o = {};
@@ -402,22 +704,424 @@ SELECT ..."></textarea>
         return o;
       });
     }
+
     function round2(n) { return Math.round(n * 100) / 100; }
 
+    /* ============================== LEARN CONTENT ============================== */
+        /* ============================== LEARN CONTENT ============================== */
+    const learnContent = {
+      "SELECT Basics": {
+        topic: "SELECT Basics",
+        body: `
+          <div class="learn-section">
+            <h4>📌 What is SELECT?</h4>
+            <p>The <code>SELECT</code> statement is used to retrieve data from a database. It is the most fundamental SQL command.</p>
+          </div>
+          <div class="learn-section">
+            <h4>🔧 Syntax</h4>
+            <div class="learn-example">
+              <span class="keyword">SELECT</span> column1, column2 <span class="keyword">FROM</span> <span class="table">table_name</span>;
+            </div>
+            <p>Use <code>*</code> to select all columns.</p>
+          </div>
+          <div class="learn-section">
+            <h4>💡 Example</h4>
+            <div class="learn-example">
+              <span class="keyword">SELECT</span> first_name, last_name <span class="keyword">FROM</span> <span class="table">employees</span>;
+            </div>
+            <div class="learn-output">
+              <strong>Output:</strong><br>
+              John | Smith<br>
+              Sara | Johnson<br>
+              Mike | Brown
+            </div>
+          </div>
+        `
+      },
+      "WHERE Filtering": {
+        topic: "WHERE Filtering",
+        body: `
+          <div class="learn-section">
+            <h4>📌 What is WHERE?</h4>
+            <p>The <code>WHERE</code> clause filters rows based on a condition. Only rows that meet the condition are returned.</p>
+          </div>
+          <div class="learn-section">
+            <h4>🔧 Common Operators</h4>
+            <ul>
+              <li><code>=</code> — equal to</li>
+              <li><code>&gt;</code> — greater than</li>
+              <li><code>&lt;</code> — less than</li>
+              <li><code>&gt;=</code> — greater than or equal</li>
+              <li><code>&lt;=</code> — less than or equal</li>
+              <li><code>LIKE</code> — pattern matching</li>
+              <li><code>IN</code> — matches any value in a list</li>
+            </ul>
+          </div>
+          <div class="learn-section">
+            <h4>💡 Example</h4>
+            <div class="learn-example">
+              <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="table">employees</span><br>
+              <span class="keyword">WHERE</span> salary > 60000;
+            </div>
+            <div class="learn-output">
+              <strong>Output:</strong> Employees earning more than 60,000.
+            </div>
+          </div>
+        `
+      },
+      "ORDER BY & LIMIT": {
+        topic: "ORDER BY & LIMIT",
+        body: `
+          <div class="learn-section">
+            <h4>📌 ORDER BY</h4>
+            <p><code>ORDER BY</code> sorts results by one or more columns. Use <code>ASC</code> (ascending) or <code>DESC</code> (descending).</p>
+          </div>
+          <div class="learn-section">
+            <h4>📌 LIMIT</h4>
+            <p><code>LIMIT</code> restricts the number of rows returned — useful for previewing data.</p>
+          </div>
+          <div class="learn-section">
+            <h4>💡 Example</h4>
+            <div class="learn-example">
+              <span class="keyword">SELECT</span> first_name, salary <span class="keyword">FROM</span> <span class="table">employees</span><br>
+              <span class="keyword">ORDER BY</span> salary <span class="keyword">DESC</span><br>
+              <span class="keyword">LIMIT</span> 5;
+            </div>
+            <div class="learn-output">
+              <strong>Output:</strong> Top 5 highest-paid employees.
+            </div>
+          </div>
+        `
+      },
+      "Aggregate Functions": {
+        topic: "Aggregate Functions",
+        body: `
+          <div class="learn-section">
+            <h4>📌 What are Aggregate Functions?</h4>
+            <p>Aggregate functions calculate a single value from a group of rows.</p>
+          </div>
+          <div class="learn-section">
+            <h4>🔧 Common Functions</h4>
+            <ul>
+              <li><code>COUNT()</code> — number of rows</li>
+              <li><code>SUM()</code> — total of a numeric column</li>
+              <li><code>AVG()</code> — average of a numeric column</li>
+              <li><code>MIN()</code> — minimum value</li>
+              <li><code>MAX()</code> — maximum value</li>
+            </ul>
+          </div>
+          <div class="learn-section">
+            <h4>💡 Example</h4>
+            <div class="learn-example">
+              <span class="keyword">SELECT</span> <span class="func">AVG</span>(salary) <span class="keyword">AS</span> avg_salary<br>
+              <span class="keyword">FROM</span> <span class="table">employees</span>;
+            </div>
+            <div class="learn-output">
+              <strong>Output:</strong> The average salary of all employees.
+            </div>
+          </div>
+        `
+      },
+      "GROUP BY": {
+        topic: "GROUP BY",
+        body: `
+          <div class="learn-section">
+            <h4>📌 What is GROUP BY?</h4>
+            <p><code>GROUP BY</code> groups rows that have the same values in specified columns, then applies aggregate functions to each group.</p>
+          </div>
+          <div class="learn-section">
+            <h4>💡 Example</h4>
+            <div class="learn-example">
+              <span class="keyword">SELECT</span> department_id, <span class="func">AVG</span>(salary) <span class="keyword">AS</span> avg_salary<br>
+              <span class="keyword">FROM</span> <span class="table">employees</span><br>
+              <span class="keyword">GROUP BY</span> department_id;
+            </div>
+            <div class="learn-output">
+              <strong>Output:</strong> Average salary for each department.
+            </div>
+          </div>
+        `
+      },
+      "HAVING": {
+        topic: "HAVING",
+        body: `
+          <div class="learn-section">
+            <h4>📌 What is HAVING?</h4>
+            <p><code>WHERE</code> filters rows before grouping. <code>HAVING</code> filters groups after grouping.</p>
+          </div>
+          <div class="learn-section">
+            <h4>💡 Example</h4>
+            <div class="learn-example">
+              <span class="keyword">SELECT</span> department_id, <span class="func">AVG</span>(salary) <span class="keyword">AS</span> avg_salary<br>
+              <span class="keyword">FROM</span> <span class="table">employees</span><br>
+              <span class="keyword">GROUP BY</span> department_id<br>
+              <span class="keyword">HAVING</span> <span class="func">AVG</span>(salary) > 65000;
+            </div>
+            <div class="learn-output">
+              <strong>Output:</strong> Departments with average salary above 65,000.
+            </div>
+          </div>
+        `
+      },
+      "JOINs": {
+        topic: "JOINs",
+        body: `
+          <div class="learn-section">
+            <h4>📌 What are JOINs?</h4>
+            <p><strong>JOIN</strong> combines data from multiple tables based on related columns.</p>
+          </div>
+          <div class="learn-section">
+            <h4>🔧 Types of JOINs</h4>
+            <ul>
+              <li><code>INNER JOIN</code> — returns matching rows from both tables</li>
+              <li><code>LEFT JOIN</code> — returns all rows from the left table</li>
+              <li><code>RIGHT JOIN</code> — returns all rows from the right table</li>
+              <li><code>FULL JOIN</code> — returns all rows from both tables</li>
+            </ul>
+          </div>
+          <div class="learn-section">
+            <h4>💡 Example</h4>
+            <div class="learn-example">
+              <span class="keyword">SELECT</span> e.first_name, d.name <span class="keyword">AS</span> department<br>
+              <span class="keyword">FROM</span> <span class="table">employees</span> e<br>
+              <span class="keyword">INNER JOIN</span> <span class="table">departments</span> d <span class="keyword">ON</span> e.department_id = d.id;
+            </div>
+            <div class="learn-output">
+              <strong>Output:</strong> Each employee with their department name.
+            </div>
+          </div>
+        `
+      },
+      "Subqueries": {
+        topic: "Subqueries",
+        body: `
+          <div class="learn-section">
+            <h4>📌 What is a Subquery?</h4>
+            <p>A <strong>subquery</strong> is a query inside another query. It can be used in <code>WHERE</code>, <code>FROM</code>, or <code>SELECT</code>.</p>
+          </div>
+          <div class="learn-section">
+            <h4>💡 Example</h4>
+            <div class="learn-example">
+              <span class="keyword">SELECT</span> first_name, salary<br>
+              <span class="keyword">FROM</span> <span class="table">employees</span><br>
+              <span class="keyword">WHERE</span> salary > (<span class="keyword">SELECT</span> <span class="func">AVG</span>(salary) <span class="keyword">FROM</span> <span class="table">employees</span>);
+            </div>
+            <div class="learn-output">
+              <strong>Output:</strong> Employees earning above the company average.
+            </div>
+          </div>
+        `
+      },
+      "Set Operations": {
+        topic: "Set Operations",
+        body: `
+          <div class="learn-section">
+            <h4>📌 What are Set Operations?</h4>
+            <p>Set operations combine results from multiple queries.</p>
+          </div>
+          <div class="learn-section">
+            <h4>🔧 Types</h4>
+            <ul>
+              <li><code>UNION</code> — combines results, removes duplicates</li>
+              <li><code>UNION ALL</code> — combines results, keeps duplicates</li>
+              <li><code>INTERSECT</code> — returns common rows</li>
+              <li><code>EXCEPT</code> — returns rows from the first query not in the second</li>
+            </ul>
+          </div>
+          <div class="learn-section">
+            <h4>💡 Example</h4>
+            <div class="learn-example">
+              <span class="keyword">SELECT</span> city <span class="keyword">FROM</span> <span class="table">employees</span><br>
+              <span class="keyword">UNION</span><br>
+              <span class="keyword">SELECT</span> location <span class="keyword">FROM</span> <span class="table">departments</span>;
+            </div>
+          </div>
+        `
+      },
+      "Window Functions": {
+        topic: "Window Functions",
+        body: `
+          <div class="learn-section">
+            <h4>📌 What are Window Functions?</h4>
+            <p>Window functions perform calculations across a set of rows related to the current row — without collapsing them into a single group.</p>
+          </div>
+          <div class="learn-section">
+            <h4>🔧 Common Functions</h4>
+            <ul>
+              <li><code>ROW_NUMBER()</code> — sequential number per row</li>
+              <li><code>RANK()</code> — rank with gaps on ties</li>
+              <li><code>DENSE_RANK()</code> — rank without gaps</li>
+              <li><code>SUM() OVER</code> — running totals</li>
+              <li><code>LAG() / LEAD()</code> — access previous/next rows</li>
+            </ul>
+          </div>
+          <div class="learn-section">
+            <h4>💡 Example</h4>
+            <div class="learn-example">
+              <span class="keyword">SELECT</span> first_name, salary,<br>
+              <span class="func">ROW_NUMBER</span>() <span class="keyword">OVER</span> (<span class="keyword">ORDER BY</span> salary <span class="keyword">DESC</span>) <span class="keyword">AS</span> rank<br>
+              <span class="keyword">FROM</span> <span class="table">employees</span>;
+            </div>
+          </div>
+        `
+      },
+      "CTEs": {
+        topic: "CTEs",
+        body: `
+          <div class="learn-section">
+            <h4>📌 What are CTEs?</h4>
+            <p>A <strong>CTE</strong> (Common Table Expression) creates a temporary named result set that you can reference within a query.</p>
+          </div>
+          <div class="learn-section">
+            <h4>🔧 Syntax</h4>
+            <div class="learn-example">
+              <span class="keyword">WITH</span> cte_name <span class="keyword">AS</span> (<br>
+              &nbsp;&nbsp;<span class="keyword">SELECT</span> ...<br>
+              )<br>
+              <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> cte_name;
+            </div>
+          </div>
+          <div class="learn-section">
+            <h4>💡 Example</h4>
+            <div class="learn-example">
+              <span class="keyword">WITH</span> dept_avg <span class="keyword">AS</span> (<br>
+              &nbsp;&nbsp;<span class="keyword">SELECT</span> department_id, <span class="func">AVG</span>(salary) <span class="keyword">AS</span> avg_sal<br>
+              &nbsp;&nbsp;<span class="keyword">FROM</span> <span class="table">employees</span><br>
+              &nbsp;&nbsp;<span class="keyword">GROUP BY</span> department_id<br>
+              )<br>
+              <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> dept_avg <span class="keyword">WHERE</span> avg_sal > 65000;
+            </div>
+          </div>
+        `
+      },
+      "CASE Expressions": {
+        topic: "CASE Expressions",
+        body: `
+          <div class="learn-section">
+            <h4>📌 What is CASE?</h4>
+            <p><code>CASE</code> works like an if-then-else statement in SQL.</p>
+          </div>
+          <div class="learn-section">
+            <h4>🔧 Syntax</h4>
+            <div class="learn-example">
+              <span class="keyword">CASE</span><br>
+              &nbsp;&nbsp;<span class="keyword">WHEN</span> condition1 <span class="keyword">THEN</span> result1<br>
+              &nbsp;&nbsp;<span class="keyword">WHEN</span> condition2 <span class="keyword">THEN</span> result2<br>
+              &nbsp;&nbsp;<span class="keyword">ELSE</span> result3<br>
+              <span class="keyword">END</span>
+            </div>
+          </div>
+          <div class="learn-section">
+            <h4>💡 Example</h4>
+            <div class="learn-example">
+              <span class="keyword">SELECT</span> first_name, salary,<br>
+              <span class="keyword">CASE</span><br>
+              &nbsp;&nbsp;<span class="keyword">WHEN</span> salary > 80000 <span class="keyword">THEN</span> <span class="string">'High'</span><br>
+              &nbsp;&nbsp;<span class="keyword">WHEN</span> salary >= 60000 <span class="keyword">THEN</span> <span class="string">'Medium'</span><br>
+              &nbsp;&nbsp;<span class="keyword">ELSE</span> <span class="string">'Low'</span><br>
+              <span class="keyword">END</span> <span class="keyword">AS</span> salary_band<br>
+              <span class="keyword">FROM</span> <span class="table">employees</span>;
+            </div>
+          </div>
+        `
+      },
+      "String Functions": {
+        topic: "String Functions",
+        body: `
+          <div class="learn-section">
+            <h4>📌 Common String Functions</h4>
+            <ul>
+              <li><code>UPPER(text)</code> — convert to uppercase</li>
+              <li><code>LOWER(text)</code> — convert to lowercase</li>
+              <li><code>LENGTH(text)</code> — number of characters</li>
+              <li><code>SUBSTRING(text, start, length)</code> — extract part</li>
+              <li><code>CONCAT(text1, text2)</code> — join strings</li>
+              <li><code>TRIM(text)</code> — remove spaces</li>
+            </ul>
+          </div>
+          <div class="learn-section">
+            <h4>💡 Example</h4>
+            <div class="learn-example">
+              <span class="keyword">SELECT</span> <span class="func">UPPER</span>(first_name), <span class="func">LOWER</span>(last_name)<br>
+              <span class="keyword">FROM</span> <span class="table">employees</span>;
+            </div>
+          </div>
+        `
+      },
+      "Date Functions": {
+        topic: "Date Functions",
+        body: `
+          <div class="learn-section">
+            <h4>📌 Common Date Functions</h4>
+            <ul>
+              <li><code>EXTRACT(YEAR FROM date)</code> — get the year</li>
+              <li><code>EXTRACT(MONTH FROM date)</code> — get the month</li>
+              <li><code>DATE</code> — convert to date</li>
+              <li><code>DATEDIFF(date1, date2)</code> — difference in days</li>
+            </ul>
+          </div>
+          <div class="learn-section">
+            <h4>💡 Example</h4>
+            <div class="learn-example">
+              <span class="keyword">SELECT</span> first_name, <span class="func">EXTRACT</span>(YEAR <span class="keyword">FROM</span> hire_date) <span class="keyword">AS</span> hire_year<br>
+              <span class="keyword">FROM</span> <span class="table">employees</span>;
+            </div>
+          </div>
+        `
+      },
+      "DML (INSERT/UPDATE/DELETE)": {
+        topic: "DML (INSERT/UPDATE/DELETE)",
+        body: `
+          <div class="learn-section">
+            <h4>📌 What is DML?</h4>
+            <p>Data Manipulation Language (DML) is used to modify data in tables.</p>
+          </div>
+          <div class="learn-section">
+            <h4>🔧 Commands</h4>
+            <ul>
+              <li><code>INSERT INTO</code> — add new rows</li>
+              <li><code>UPDATE</code> — modify existing rows</li>
+              <li><code>DELETE FROM</code> — remove rows</li>
+            </ul>
+          </div>
+          <div class="learn-section">
+            <h4>⚠️ Important</h4>
+            <p>Always use <code>WHERE</code> with <code>UPDATE</code> and <code>DELETE</code> to avoid modifying all rows!</p>
+          </div>
+          <div class="learn-section">
+            <h4>💡 Example</h4>
+            <div class="learn-example">
+              <span class="keyword">UPDATE</span> <span class="table">employees</span><br>
+              <span class="keyword">SET</span> salary = salary * 1.10<br>
+              <span class="keyword">WHERE</span> department_id = 1;
+            </div>
+            <div class="learn-output">
+              <strong>Output:</strong> Gives a 10% raise to all employees in department 1.
+            </div>
+          </div>
+        `
+      }
+    };
     /* ============================== EXERCISE BUILDER ============================== */
     let EXERCISES = [];
     let _id = 0;
+
     function add(category, question, hint, keywords, dataset, getResult) {
       _id++;
       EXERCISES.push({
-        id: _id, category, question, hint,
+        id: _id,
+        category,
+        question,
+        hint,
         keywords: keywords.map(k => k.toLowerCase()),
-        dataset, getResult, attempted: false
+        dataset,
+        getResult,
+        attempted: false
       });
     }
 
     /* ---------- 1. SELECT BASICS (15) ---------- */
-    (function () {
+    (function() {
       const specs = [
         ["employees", ["first_name", "last_name"]],
         ["employees", ["email", "city"]],
@@ -447,7 +1151,7 @@ SELECT ..."></textarea>
     })();
 
     /* ---------- 2. WHERE FILTERING (15) ---------- */
-    (function () {
+    (function() {
       const specs = [
         ["employees", "salary", ">", 60000, "gt"],
         ["employees", "department_id", "=", 1, "eq"],
@@ -484,7 +1188,7 @@ SELECT ..."></textarea>
     })();
 
     /* ---------- 3. ORDER BY & LIMIT (10) ---------- */
-    (function () {
+    (function() {
       const specs = [
         ["employees", "salary", "desc", 5],
         ["employees", "hire_date", "asc", 5],
@@ -504,7 +1208,8 @@ SELECT ..."></textarea>
           ["select", "from", ds, "order by", dir],
           ds,
           () => {
-            const arr = [...datasets[ds]].sort((a, b) => dir === "desc" ? (a[col] < b[col] ? 1 : -1) : (a[col] > b[col] ? 1 : -1));
+            const arr = [...datasets[ds]].sort((a, b) => dir === "desc" ? (a[col] < b[col] ? 1 : -1) : (a[col] > b[col] ?
+              1 : -1));
             return arr.slice(0, lim);
           }
         );
@@ -512,7 +1217,7 @@ SELECT ..."></textarea>
     })();
 
     /* ---------- 4. AGGREGATE FUNCTIONS (15) ---------- */
-    (function () {
+    (function() {
       const specs = [
         ["employees", "COUNT", "*", "total_employees"],
         ["employees", "AVG", "salary", "avg_salary"],
@@ -551,7 +1256,7 @@ SELECT ..."></textarea>
     })();
 
     /* ---------- 5. GROUP BY (10) ---------- */
-    (function () {
+    (function() {
       const specs = [
         ["employees", "department_id", "salary", "AVG", "avg_salary"],
         ["employees", "department_id", "id", "COUNT", "emp_count"],
@@ -589,7 +1294,7 @@ SELECT ..."></textarea>
     })();
 
     /* ---------- 6. HAVING (10) ---------- */
-    (function () {
+    (function() {
       const specs = [
         ["employees", "department_id", "salary", "AVG", "avg_salary", 60000],
         ["sales", "region", "amount", "SUM", "total_amount", 1500],
@@ -627,7 +1332,7 @@ SELECT ..."></textarea>
     })();
 
     /* ---------- 7. JOINS (20) ---------- */
-    (function () {
+    (function() {
       // employees + departments
       for (let i = 0; i < 6; i++) {
         const type = ["INNER", "LEFT", "INNER", "LEFT", "INNER", "LEFT"][i];
@@ -709,8 +1414,9 @@ SELECT ..."></textarea>
     })();
 
     /* ---------- 8. SUBQUERIES (15) ---------- */
-    (function () {
-      add("Subqueries", "Write a query to find all employees whose salary is greater than the average salary of all employees.",
+    (function() {
+      add("Subqueries",
+        "Write a query to find all employees whose salary is greater than the average salary of all employees.",
         "Use a subquery: WHERE salary > (SELECT AVG(salary) FROM employees);",
         ["select", "from", "employees", "where", "select", "avg"], "employees",
         () => {
@@ -726,7 +1432,8 @@ SELECT ..."></textarea>
           return datasets.departments.filter(r => r.budget > avg);
         });
 
-      add("Subqueries", "Write a query to find all inventory items whose quantity is below the average quantity across all items.",
+      add("Subqueries",
+        "Write a query to find all inventory items whose quantity is below the average quantity across all items.",
         "Use WHERE quantity < (SELECT AVG(quantity) FROM inventory);",
         ["select", "from", "inventory", "where", "select", "avg"], "inventory",
         () => {
@@ -734,7 +1441,8 @@ SELECT ..."></textarea>
           return datasets.inventory.filter(r => r.quantity < avg);
         });
 
-      add("Subqueries", "Write a query to list employees who work in the department with the highest budget, using a subquery on departments.",
+      add("Subqueries",
+        "Write a query to list employees who work in the department with the highest budget, using a subquery on departments.",
         "Use WHERE department_id = (SELECT id FROM departments ORDER BY budget DESC LIMIT 1);",
         ["select", "from", "employees", "where", "select"], "employees",
         () => {
@@ -742,7 +1450,8 @@ SELECT ..."></textarea>
           return datasets.employees.filter(e => e.department_id === top.id);
         });
 
-      add("Subqueries", "Write a query to find employees who have made at least one sale, using a subquery with IN on sales.employee_id.",
+      add("Subqueries",
+        "Write a query to find employees who have made at least one sale, using a subquery with IN on sales.employee_id.",
         "Use WHERE id IN (SELECT DISTINCT employee_id FROM sales);",
         ["select", "from", "employees", "where", "in", "select"], "employees",
         () => {
@@ -763,7 +1472,8 @@ SELECT ..."></textarea>
         ["select", "from", "departments", "where", "exists"], "departments",
         () => datasets.departments.filter(d => datasets.employees.some(e => e.department_id === d.id)));
 
-      add("Subqueries", "Write a query to find the sale with the maximum amount using a subquery instead of ORDER BY/LIMIT.",
+      add("Subqueries",
+        "Write a query to find the sale with the maximum amount using a subquery instead of ORDER BY/LIMIT.",
         "Use WHERE amount = (SELECT MAX(amount) FROM sales);",
         ["select", "from", "sales", "where", "select", "max"], "sales",
         () => {
@@ -771,7 +1481,8 @@ SELECT ..."></textarea>
           return datasets.sales.filter(s => s.amount === max);
         });
 
-      add("Subqueries", "Write a query to list employees earning more than 'Mike Brown' using a scalar subquery for his salary.",
+      add("Subqueries",
+        "Write a query to list employees earning more than 'Mike Brown' using a scalar subquery for his salary.",
         "Use WHERE salary > (SELECT salary FROM employees WHERE first_name='Mike' AND last_name='Brown');",
         ["select", "from", "employees", "where", "select"], "employees",
         () => {
@@ -779,7 +1490,8 @@ SELECT ..."></textarea>
           return datasets.employees.filter(e => e.salary > mike.salary);
         });
 
-      add("Subqueries", "Write a query to find inventory items priced above the average price within their own category (correlated subquery).",
+      add("Subqueries",
+        "Write a query to find inventory items priced above the average price within their own category (correlated subquery).",
         "Use a correlated subquery: WHERE unit_price > (SELECT AVG(unit_price) FROM inventory i2 WHERE i2.category = inventory.category);",
         ["select", "from", "inventory", "where", "select", "avg"], "inventory",
         () => {
@@ -792,7 +1504,8 @@ SELECT ..."></textarea>
           });
         });
 
-      add("Subqueries", "Write a query to count how many employees earn above the company average salary, using a subquery.",
+      add("Subqueries",
+        "Write a query to count how many employees earn above the company average salary, using a subquery.",
         "Use SELECT COUNT(*) FROM employees WHERE salary > (SELECT AVG(salary) FROM employees);",
         ["select", "count", "from", "employees", "where", "select", "avg"], "employees",
         () => {
@@ -800,7 +1513,8 @@ SELECT ..."></textarea>
           return [{ above_avg_count: datasets.employees.filter(e => e.salary > avg).length }];
         });
 
-      add("Subqueries", "Write a query to find the department name of the employee with the highest salary, using a nested subquery.",
+      add("Subqueries",
+        "Write a query to find the department name of the employee with the highest salary, using a nested subquery.",
         "First find the top earner's department_id, then join or subquery into departments.",
         ["select", "from", "departments", "where", "select"], "departments",
         () => {
@@ -809,7 +1523,8 @@ SELECT ..."></textarea>
           return [{ department: dep ? dep.name : null, top_earner: top.first_name }];
         });
 
-      add("Subqueries", "Write a query to list sales whose amount is greater than the average amount for their own region (correlated subquery).",
+      add("Subqueries",
+        "Write a query to list sales whose amount is greater than the average amount for their own region (correlated subquery).",
         "Compare s.amount to (SELECT AVG(amount) FROM sales s2 WHERE s2.region = s.region);",
         ["select", "from", "sales", "where", "select", "avg"], "sales",
         () => {
@@ -822,7 +1537,8 @@ SELECT ..."></textarea>
           });
         });
 
-      add("Subqueries", "Write a query to find employees who manage at least one other employee, using a subquery on manager_id.",
+      add("Subqueries",
+        "Write a query to find employees who manage at least one other employee, using a subquery on manager_id.",
         "Use WHERE id IN (SELECT DISTINCT manager_id FROM employees WHERE manager_id IS NOT NULL);",
         ["select", "from", "employees", "where", "in", "select"], "employees",
         () => {
@@ -837,8 +1553,9 @@ SELECT ..."></textarea>
     })();
 
     /* ---------- 9. SET OPERATIONS (8) ---------- */
-    (function () {
-      add("Set Operations", "Write a UNION query to combine the list of cities from employees with the list of locations from departments.",
+    (function() {
+      add("Set Operations",
+        "Write a UNION query to combine the list of cities from employees with the list of locations from departments.",
         "Use SELECT city FROM employees UNION SELECT location FROM departments;",
         ["select", "from", "employees", "union", "select", "from", "departments"], "employees",
         () => {
@@ -846,12 +1563,15 @@ SELECT ..."></textarea>
           return [...s].map(city => ({ city }));
         });
 
-      add("Set Operations", "Write a UNION ALL query combining all product_id values from sales with all id values from inventory (as product ids).",
+      add("Set Operations",
+        "Write a UNION ALL query combining all product_id values from sales with all id values from inventory (as product ids).",
         "Use SELECT product_id FROM sales UNION ALL SELECT id FROM inventory;",
         ["select", "from", "sales", "union all", "select", "from", "inventory"], "sales",
-        () => [...datasets.sales.map(s => ({ product_id: s.product_id })), ...datasets.inventory.map(i => ({ product_id: i.id }))]);
+        () => [...datasets.sales.map(s => ({ product_id: s.product_id })), ...datasets.inventory.map(i => ({ product_id: i
+            .id }))]);
 
-      add("Set Operations", "Write a query simulating INTERSECT: find warehouses that appear in inventory AND also match a department location naming pattern (conceptual practice).",
+      add("Set Operations",
+        "Write a query simulating INTERSECT: find warehouses that appear in inventory AND also match a department location naming pattern (conceptual practice).",
         "Real INTERSECT: SELECT warehouse FROM inventory INTERSECT SELECT location FROM departments; (returns common values only).",
         ["select", "from", "inventory"], "inventory",
         () => {
@@ -861,7 +1581,8 @@ SELECT ..."></textarea>
           return common.length ? common.map(v => ({ value: v })) : [{ value: "(no overlap in this sample data)" }];
         });
 
-      add("Set Operations", "Write a UNION query listing distinct regions from sales combined with distinct warehouses from inventory.",
+      add("Set Operations",
+        "Write a UNION query listing distinct regions from sales combined with distinct warehouses from inventory.",
         "Use SELECT region AS label FROM sales UNION SELECT warehouse AS label FROM inventory;",
         ["select", "from", "sales", "union", "select", "from", "inventory"], "sales",
         () => {
@@ -869,7 +1590,8 @@ SELECT ..."></textarea>
           return [...s].map(label => ({ label }));
         });
 
-      add("Set Operations", "Write a query using EXCEPT/MINUS logic to find department locations that do NOT appear as an employee city.",
+      add("Set Operations",
+        "Write a query using EXCEPT/MINUS logic to find department locations that do NOT appear as an employee city.",
         "Use SELECT location FROM departments EXCEPT SELECT city FROM employees;",
         ["select", "from", "departments"], "departments",
         () => {
@@ -877,32 +1599,39 @@ SELECT ..."></textarea>
           return datasets.departments.filter(d => !citySet.has(d.location)).map(d => ({ location: d.location }));
         });
 
-      add("Set Operations", "Write a UNION query combining employee first_names with department manager first names is not directly possible; instead union employee ids present in both employees and as managers.",
+      add("Set Operations",
+        "Write a UNION query combining employee first_names with department manager first names is not directly possible; instead union employee ids present in both employees and as managers.",
         "Use SELECT id FROM employees UNION SELECT manager_id FROM employees WHERE manager_id IS NOT NULL;",
         ["select", "from", "employees", "union", "select"], "employees",
         () => {
-          const s = new Set([...datasets.employees.map(e => e.id), ...datasets.employees.map(e => e.manager_id).filter(Boolean)]);
+          const s = new Set([...datasets.employees.map(e => e.id), ...datasets.employees.map(e => e.manager_id).filter(
+            Boolean)]);
           return [...s].map(id => ({ id }));
         });
 
-      add("Set Operations", "Write a UNION ALL query stacking category names from inventory twice to demonstrate duplicate retention.",
+      add("Set Operations",
+        "Write a UNION ALL query stacking category names from inventory twice to demonstrate duplicate retention.",
         "Use SELECT category FROM inventory UNION ALL SELECT category FROM inventory;",
         ["select", "from", "inventory", "union all"], "inventory",
-        () => [...datasets.inventory.map(i => ({ category: i.category })), ...datasets.inventory.map(i => ({ category: i.category }))].slice(0, 10));
+        () => [...datasets.inventory.map(i => ({ category: i.category })), ...datasets.inventory.map(i => ({ category: i
+            .category }))].slice(0, 10));
 
-      add("Set Operations", "Write a query combining distinct product_ids sold in 'East' region with those sold in 'West' region using UNION.",
+      add("Set Operations",
+        "Write a query combining distinct product_ids sold in 'East' region with those sold in 'West' region using UNION.",
         "Use SELECT product_id FROM sales WHERE region='East' UNION SELECT product_id FROM sales WHERE region='West';",
         ["select", "from", "sales", "where", "union", "select"], "sales",
         () => {
           const s = new Set([...datasets.sales.filter(s => s.region === "East").map(s => s.product_id),
-          ...datasets.sales.filter(s => s.region === "West").map(s => s.product_id)]);
+            ...datasets.sales.filter(s => s.region === "West").map(s => s.product_id)
+          ]);
           return [...s].map(product_id => ({ product_id }));
         });
     })();
 
     /* ---------- 10. WINDOW FUNCTIONS (15) ---------- */
-    (function () {
-      add("Window Functions", "Write a query using ROW_NUMBER() to number employees ordered by salary descending.",
+    (function() {
+      add("Window Functions",
+        "Write a query using ROW_NUMBER() to number employees ordered by salary descending.",
         "Use SELECT first_name, salary, ROW_NUMBER() OVER (ORDER BY salary DESC) AS rn FROM employees;",
         ["select", "row_number", "over", "order by", "from", "employees"], "employees",
         () => {
@@ -919,12 +1648,14 @@ SELECT ..."></textarea>
           const out = [];
           Object.values(byDept).forEach(grp => {
             const s = [...grp].sort((a, b) => b.salary - a.salary);
-            s.forEach((e, i) => out.push({ department_id: e.department_id, first_name: e.first_name, salary: e.salary, rnk: i + 1 }));
+            s.forEach((e, i) => out.push({ department_id: e.department_id, first_name: e.first_name, salary: e
+                .salary, rnk: i + 1 }));
           });
           return out;
         });
 
-      add("Window Functions", "Write a query using DENSE_RANK() to rank inventory items by unit_price within each category.",
+      add("Window Functions",
+        "Write a query using DENSE_RANK() to rank inventory items by unit_price within each category.",
         "Use DENSE_RANK() OVER (PARTITION BY category ORDER BY unit_price DESC) AS drnk;",
         ["select", "dense_rank", "over", "partition by", "order by", "from", "inventory"], "inventory",
         () => {
@@ -933,12 +1664,14 @@ SELECT ..."></textarea>
           const out = [];
           Object.values(byCat).forEach(grp => {
             const s = [...grp].sort((a, b) => b.unit_price - a.unit_price);
-            s.forEach((i, idx) => out.push({ category: i.category, product_name: i.product_name, unit_price: i.unit_price, drnk: idx + 1 }));
+            s.forEach((i, idx) => out.push({ category: i.category, product_name: i.product_name, unit_price: i
+                .unit_price, drnk: idx + 1 }));
           });
           return out;
         });
 
-      add("Window Functions", "Write a query using SUM() OVER (PARTITION BY region) to show each sale's amount alongside the total amount for its region.",
+      add("Window Functions",
+        "Write a query using SUM() OVER (PARTITION BY region) to show each sale's amount alongside the total amount for its region.",
         "Use SUM(amount) OVER (PARTITION BY region) AS region_total;",
         ["select", "sum", "over", "partition by", "from", "sales"], "sales",
         () => {
@@ -950,7 +1683,8 @@ SELECT ..."></textarea>
           });
         });
 
-      add("Window Functions", "Write a query using AVG() OVER (PARTITION BY department_id) to compare each employee's salary to their department's average.",
+      add("Window Functions",
+        "Write a query using AVG() OVER (PARTITION BY department_id) to compare each employee's salary to their department's average.",
         "Use AVG(salary) OVER (PARTITION BY department_id) AS dept_avg_salary;",
         ["select", "avg", "over", "partition by", "from", "employees"], "employees",
         () => {
@@ -959,33 +1693,40 @@ SELECT ..."></textarea>
           return datasets.employees.map(e => {
             const grp = byDept[e.department_id];
             const avg = round2(grp.reduce((s, r) => s + r.salary, 0) / grp.length);
-            return { first_name: e.first_name, department_id: e.department_id, salary: e.salary, dept_avg_salary: avg };
+            return { first_name: e.first_name, department_id: e.department_id, salary: e.salary,
+              dept_avg_salary: avg };
           });
         });
 
-      add("Window Functions", "Write a query using LAG() to show each sale's amount alongside the previous sale's amount, ordered by sale_date.",
+      add("Window Functions",
+        "Write a query using LAG() to show each sale's amount alongside the previous sale's amount, ordered by sale_date.",
         "Use LAG(amount) OVER (ORDER BY sale_date) AS prev_amount;",
         ["select", "lag", "over", "order by", "from", "sales"], "sales",
         () => {
           const s = [...datasets.sales].sort((a, b) => a.sale_date.localeCompare(b.sale_date));
-          return s.map((r, i) => ({ sale_date: r.sale_date, amount: r.amount, prev_amount: i > 0 ? s[i - 1].amount : null }));
+          return s.map((r, i) => ({ sale_date: r.sale_date, amount: r.amount, prev_amount: i > 0 ? s[i - 1].amount :
+              null }));
         });
 
-      add("Window Functions", "Write a query using LEAD() to show each sale's amount alongside the next sale's amount, ordered by sale_date.",
+      add("Window Functions",
+        "Write a query using LEAD() to show each sale's amount alongside the next sale's amount, ordered by sale_date.",
         "Use LEAD(amount) OVER (ORDER BY sale_date) AS next_amount;",
         ["select", "lead", "over", "order by", "from", "sales"], "sales",
         () => {
           const s = [...datasets.sales].sort((a, b) => a.sale_date.localeCompare(b.sale_date));
-          return s.map((r, i) => ({ sale_date: r.sale_date, amount: r.amount, next_amount: i < s.length - 1 ? s[i + 1].amount : null }));
+          return s.map((r, i) => ({ sale_date: r.sale_date, amount: r.amount, next_amount: i < s.length - 1 ? s[i + 1]
+              .amount : null }));
         });
 
-      add("Window Functions", "Write a query using a running total (SUM() OVER ORDER BY) of sales amount ordered by sale_date.",
+      add("Window Functions",
+        "Write a query using a running total (SUM() OVER ORDER BY) of sales amount ordered by sale_date.",
         "Use SUM(amount) OVER (ORDER BY sale_date) AS running_total;",
         ["select", "sum", "over", "order by", "from", "sales"], "sales",
         () => {
           const s = [...datasets.sales].sort((a, b) => a.sale_date.localeCompare(b.sale_date));
           let running = 0;
-          return s.map(r => { running += r.amount; return { sale_date: r.sale_date, amount: r.amount, running_total: running }; });
+          return s.map(r => { running += r.amount; return { sale_date: r.sale_date, amount: r.amount,
+              running_total: running }; });
         });
 
       add("Window Functions", "Write a query using NTILE(4) to split employees into 4 salary buckets.",
@@ -993,11 +1734,14 @@ SELECT ..."></textarea>
         ["select", "ntile", "over", "order by", "from", "employees"], "employees",
         () => {
           const s = [...datasets.employees].sort((a, b) => a.salary - b.salary);
-          const n = s.length, buckets = 4;
-          return s.map((e, i) => ({ first_name: e.first_name, salary: e.salary, quartile: Math.min(buckets, Math.floor(i / (n / buckets)) + 1) }));
+          const n = s.length,
+            buckets = 4;
+          return s.map((e, i) => ({ first_name: e.first_name, salary: e.salary, quartile: Math.min(buckets, Math.floor(i /
+              (n / buckets)) + 1) }));
         });
 
-      add("Window Functions", "Write a query showing each employee's salary and the MAX salary in their department using a window function.",
+      add("Window Functions",
+        "Write a query showing each employee's salary and the MAX salary in their department using a window function.",
         "Use MAX(salary) OVER (PARTITION BY department_id) AS dept_max_salary;",
         ["select", "max", "over", "partition by", "from", "employees"], "employees",
         () => {
@@ -1005,11 +1749,13 @@ SELECT ..."></textarea>
           datasets.employees.forEach(e => { (byDept[e.department_id] = byDept[e.department_id] || []).push(e); });
           return datasets.employees.map(e => {
             const max = Math.max(...byDept[e.department_id].map(r => r.salary));
-            return { first_name: e.first_name, department_id: e.department_id, salary: e.salary, dept_max_salary: max };
+            return { first_name: e.first_name, department_id: e.department_id, salary: e.salary,
+              dept_max_salary: max };
           });
         });
 
-      add("Window Functions", "Write a query ranking sales by amount within each region using RANK(), showing ties correctly.",
+      add("Window Functions",
+        "Write a query ranking sales by amount within each region using RANK(), showing ties correctly.",
         "Use RANK() OVER (PARTITION BY region ORDER BY amount DESC) AS rnk;",
         ["select", "rank", "over", "partition by", "order by", "from", "sales"], "sales",
         () => {
@@ -1023,7 +1769,8 @@ SELECT ..."></textarea>
           return out;
         });
 
-      add("Window Functions", "Write a query computing a 2-row moving average of sale amount ordered by sale_date.",
+      add("Window Functions",
+        "Write a query computing a 2-row moving average of sale amount ordered by sale_date.",
         "Use AVG(amount) OVER (ORDER BY sale_date ROWS BETWEEN 1 PRECEDING AND CURRENT ROW) AS moving_avg;",
         ["select", "avg", "over", "order by", "rows", "from", "sales"], "sales",
         () => {
@@ -1035,7 +1782,8 @@ SELECT ..."></textarea>
           });
         });
 
-      add("Window Functions", "Write a query using FIRST_VALUE() to show each employee's salary alongside the highest salary in their department.",
+      add("Window Functions",
+        "Write a query using FIRST_VALUE() to show each employee's salary alongside the highest salary in their department.",
         "Use FIRST_VALUE(salary) OVER (PARTITION BY department_id ORDER BY salary DESC) AS top_salary;",
         ["select", "first_value", "over", "partition by", "order by", "from", "employees"], "employees",
         () => {
@@ -1043,42 +1791,50 @@ SELECT ..."></textarea>
           datasets.employees.forEach(e => { (byDept[e.department_id] = byDept[e.department_id] || []).push(e); });
           return datasets.employees.map(e => {
             const grp = [...byDept[e.department_id]].sort((a, b) => b.salary - a.salary);
-            return { first_name: e.first_name, department_id: e.department_id, salary: e.salary, top_salary: grp[0].salary };
+            return { first_name: e.first_name, department_id: e.department_id, salary: e.salary,
+              top_salary: grp[0].salary };
           });
         });
 
-      add("Window Functions", "Write a query using PERCENT_RANK() to compute the relative salary standing of each employee.",
+      add("Window Functions",
+        "Write a query using PERCENT_RANK() to compute the relative salary standing of each employee.",
         "Use PERCENT_RANK() OVER (ORDER BY salary) AS pct_rank;",
         ["select", "percent_rank", "over", "order by", "from", "employees"], "employees",
         () => {
           const s = [...datasets.employees].sort((a, b) => a.salary - b.salary);
           const n = s.length;
-          return s.map((e, i) => ({ first_name: e.first_name, salary: e.salary, pct_rank: n > 1 ? round2(i / (n - 1)) : 0 }));
+          return s.map((e, i) => ({ first_name: e.first_name, salary: e.salary, pct_rank: n > 1 ? round2(i / (n - 1)) :
+              0 }));
         });
 
-      add("Window Functions", "Write a query using COUNT() OVER (PARTITION BY category) to show how many inventory items share each category.",
+      add("Window Functions",
+        "Write a query using COUNT() OVER (PARTITION BY category) to show how many inventory items share each category.",
         "Use COUNT(*) OVER (PARTITION BY category) AS category_count;",
         ["select", "count", "over", "partition by", "from", "inventory"], "inventory",
         () => {
           const byCat = {};
           datasets.inventory.forEach(i => { (byCat[i.category] = byCat[i.category] || []).push(i); });
-          return datasets.inventory.map(i => ({ product_name: i.product_name, category: i.category, category_count: byCat[i.category].length }));
+          return datasets.inventory.map(i => ({ product_name: i.product_name, category: i.category,
+              category_count: byCat[i.category].length }));
         });
     })();
 
     /* ---------- 11. CTEs (8) ---------- */
-    (function () {
-      add("CTEs", "Write a query using a WITH clause (CTE) to first compute average salary per department, then select departments above 65000.",
+    (function() {
+      add("CTEs",
+        "Write a query using a WITH clause (CTE) to first compute average salary per department, then select departments above 65000.",
         "Use WITH dept_avg AS (SELECT department_id, AVG(salary) AS avg_sal FROM employees GROUP BY department_id) SELECT * FROM dept_avg WHERE avg_sal > 65000;",
         ["with", "select", "from", "employees", "group by"], "employees",
         () => {
           const byDept = {};
           datasets.employees.forEach(e => { (byDept[e.department_id] = byDept[e.department_id] || []).push(e); });
-          return Object.entries(byDept).map(([id, grp]) => ({ department_id: +id, avg_sal: round2(grp.reduce((s, r) => s + r.salary, 0) / grp.length) }))
+          return Object.entries(byDept).map(([id, grp]) => ({ department_id: +id, avg_sal: round2(grp.reduce((s, r) =>
+              s + r.salary, 0) / grp.length) }))
             .filter(r => r.avg_sal > 65000);
         });
 
-      add("CTEs", "Write a CTE that computes total sales per employee, then join it back to employees to show first_name and total_sales.",
+      add("CTEs",
+        "Write a CTE that computes total sales per employee, then join it back to employees to show first_name and total_sales.",
         "Use WITH emp_sales AS (SELECT employee_id, SUM(amount) AS total FROM sales GROUP BY employee_id) SELECT e.first_name, es.total FROM employees e JOIN emp_sales es ON e.id = es.employee_id;",
         ["with", "select", "from", "sales", "group by", "join"], "sales",
         () => {
@@ -1090,7 +1846,8 @@ SELECT ..."></textarea>
           });
         });
 
-      add("CTEs", "Write a CTE to find inventory items with below-average unit_price, then select only those in the 'Hardware' category.",
+      add("CTEs",
+        "Write a CTE to find inventory items with below-average unit_price, then select only those in the 'Hardware' category.",
         "Use WITH cheap AS (SELECT * FROM inventory WHERE unit_price < (SELECT AVG(unit_price) FROM inventory)) SELECT * FROM cheap WHERE category='Hardware';",
         ["with", "select", "from", "inventory", "where"], "inventory",
         () => {
@@ -1098,7 +1855,8 @@ SELECT ..."></textarea>
           return datasets.inventory.filter(i => i.unit_price < avg && i.category === "Hardware");
         });
 
-      add("CTEs", "Write a recursive-style CTE concept: list employees and their manager chain (simulate with a simple CTE joining employees to managers).",
+      add("CTEs",
+        "Write a recursive-style CTE concept: list employees and their manager chain (simulate with a simple CTE joining employees to managers).",
         "A simple version: WITH mgr AS (SELECT id, first_name, manager_id FROM employees) SELECT e.first_name, m.first_name AS manager FROM mgr e LEFT JOIN mgr m ON e.manager_id = m.id;",
         ["with", "select", "from", "employees", "join"], "employees",
         () => datasets.employees.map(e => {
@@ -1106,13 +1864,15 @@ SELECT ..."></textarea>
           return { employee: e.first_name, manager: m ? m.first_name : "(none)" };
         }));
 
-      add("CTEs", "Write a CTE to compute total quantity per warehouse, then filter for warehouses with more than 200 total units.",
+      add("CTEs",
+        "Write a CTE to compute total quantity per warehouse, then filter for warehouses with more than 200 total units.",
         "Use WITH wh AS (SELECT warehouse, SUM(quantity) AS total_qty FROM inventory GROUP BY warehouse) SELECT * FROM wh WHERE total_qty > 200;",
         ["with", "select", "from", "inventory", "group by"], "inventory",
         () => {
           const byWh = {};
           datasets.inventory.forEach(i => { byWh[i.warehouse] = (byWh[i.warehouse] || 0) + i.quantity; });
-          return Object.entries(byWh).map(([warehouse, total_qty]) => ({ warehouse, total_qty })).filter(r => r.total_qty > 200);
+          return Object.entries(byWh).map(([warehouse, total_qty]) => ({ warehouse, total_qty })).filter(r => r
+            .total_qty > 200);
         });
 
       add("CTEs", "Write a CTE to rank sales by amount, then select only the top 3 ranked sales.",
@@ -1120,7 +1880,8 @@ SELECT ..."></textarea>
         ["with", "select", "rank", "over", "from", "sales"], "sales",
         () => [...datasets.sales].sort((a, b) => b.amount - a.amount).slice(0, 3));
 
-      add("CTEs", "Write a CTE that computes each department's employee count, then join it to departments to show name and count.",
+      add("CTEs",
+        "Write a CTE that computes each department's employee count, then join it to departments to show name and count.",
         "Use WITH counts AS (SELECT department_id, COUNT(*) AS cnt FROM employees GROUP BY department_id) SELECT d.name, c.cnt FROM departments d JOIN counts c ON d.id = c.department_id;",
         ["with", "select", "from", "employees", "group by", "join"], "employees",
         () => {
@@ -1132,7 +1893,8 @@ SELECT ..."></textarea>
           });
         });
 
-      add("CTEs", "Write two chained CTEs: one to compute total sales per region, another to find the region with the maximum total.",
+      add("CTEs",
+        "Write two chained CTEs: one to compute total sales per region, another to find the region with the maximum total.",
         "Use WITH region_totals AS (...), max_total AS (SELECT MAX(total) FROM region_totals) SELECT * FROM region_totals WHERE total = (SELECT * FROM max_total);",
         ["with", "select", "from", "sales", "group by"], "sales",
         () => {
@@ -1145,59 +1907,75 @@ SELECT ..."></textarea>
     })();
 
     /* ---------- 12. CASE WHEN (8) ---------- */
-    (function () {
-      add("CASE Expressions", "Write a query that labels each employee's salary as 'High' (>80000), 'Medium' (60000-80000), or 'Low' (<60000) using CASE.",
+    (function() {
+      add("CASE Expressions",
+        "Write a query that labels each employee's salary as 'High' (>80000), 'Medium' (60000-80000), or 'Low' (<60000) using CASE.",
         "Use CASE WHEN salary > 80000 THEN 'High' WHEN salary >= 60000 THEN 'Medium' ELSE 'Low' END AS salary_band;",
         ["select", "case", "when", "then", "else", "end", "from", "employees"], "employees",
         () => datasets.employees.map(e => ({
-          first_name: e.first_name, salary: e.salary,
+          first_name: e.first_name,
+          salary: e.salary,
           salary_band: e.salary > 80000 ? "High" : e.salary >= 60000 ? "Medium" : "Low"
         })));
 
-      add("CASE Expressions", "Write a query that labels inventory items as 'Low Stock' (<50), 'Medium Stock' (50-150), or 'High Stock' (>150) using CASE.",
+      add("CASE Expressions",
+        "Write a query that labels inventory items as 'Low Stock' (<50), 'Medium Stock' (50-150), or 'High Stock' (>150) using CASE.",
         "Use CASE WHEN quantity < 50 THEN 'Low Stock' WHEN quantity <= 150 THEN 'Medium Stock' ELSE 'High Stock' END;",
         ["select", "case", "when", "then", "else", "end", "from", "inventory"], "inventory",
         () => datasets.inventory.map(i => ({
-          product_name: i.product_name, quantity: i.quantity,
+          product_name: i.product_name,
+          quantity: i.quantity,
           stock_level: i.quantity < 50 ? "Low Stock" : i.quantity <= 150 ? "Medium Stock" : "High Stock"
         })));
 
-      add("CASE Expressions", "Write a query that labels each sale as 'Big Sale' if amount > 1500, otherwise 'Regular Sale', using CASE.",
+      add("CASE Expressions",
+        "Write a query that labels each sale as 'Big Sale' if amount > 1500, otherwise 'Regular Sale', using CASE.",
         "Use CASE WHEN amount > 1500 THEN 'Big Sale' ELSE 'Regular Sale' END AS sale_type;",
         ["select", "case", "when", "then", "else", "end", "from", "sales"], "sales",
-        () => datasets.sales.map(s => ({ id: s.id, amount: s.amount, sale_type: s.amount > 1500 ? "Big Sale" : "Regular Sale" })));
+        () => datasets.sales.map(s => ({ id: s.id, amount: s.amount, sale_type: s.amount > 1500 ? "Big Sale" :
+            "Regular Sale" })));
 
-      add("CASE Expressions", "Write a query that categorizes departments by budget as 'Large' (>400000) or 'Standard' using CASE.",
+      add("CASE Expressions",
+        "Write a query that categorizes departments by budget as 'Large' (>400000) or 'Standard' using CASE.",
         "Use CASE WHEN budget > 400000 THEN 'Large' ELSE 'Standard' END AS budget_tier;",
         ["select", "case", "when", "then", "else", "end", "from", "departments"], "departments",
-        () => datasets.departments.map(d => ({ name: d.name, budget: d.budget, budget_tier: d.budget > 400000 ? "Large" : "Standard" })));
+        () => datasets.departments.map(d => ({ name: d.name, budget: d.budget, budget_tier: d.budget > 400000 ?
+            "Large" : "Standard" })));
 
-      add("CASE Expressions", "Write a query that flags employees hired before 2019 as 'Veteran' and others as 'Newer' using CASE.",
+      add("CASE Expressions",
+        "Write a query that flags employees hired before 2019 as 'Veteran' and others as 'Newer' using CASE.",
         "Use CASE WHEN hire_date < '2019-01-01' THEN 'Veteran' ELSE 'Newer' END AS tenure_flag;",
         ["select", "case", "when", "then", "else", "end", "from", "employees"], "employees",
-        () => datasets.employees.map(e => ({ first_name: e.first_name, hire_date: e.hire_date, tenure_flag: e.hire_date < "2019-01-01" ? "Veteran" : "Newer" })));
+        () => datasets.employees.map(e => ({ first_name: e.first_name, hire_date: e.hire_date, tenure_flag: e
+            .hire_date < "2019-01-01" ? "Veteran" : "Newer" })));
 
-      add("CASE Expressions", "Write a query classifying inventory unit_price into 'Budget' (<20), 'Mid-range' (20-80), 'Premium' (>80) using CASE.",
+      add("CASE Expressions",
+        "Write a query classifying inventory unit_price into 'Budget' (<20), 'Mid-range' (20-80), 'Premium' (>80) using CASE.",
         "Use nested CASE WHEN conditions on unit_price.",
         ["select", "case", "when", "then", "else", "end", "from", "inventory"], "inventory",
         () => datasets.inventory.map(i => ({
-          product_name: i.product_name, unit_price: i.unit_price,
+          product_name: i.product_name,
+          unit_price: i.unit_price,
           price_tier: i.unit_price < 20 ? "Budget" : i.unit_price <= 80 ? "Mid-range" : "Premium"
         })));
 
-      add("CASE Expressions", "Write a query that shows region and a CASE-based flag 'Coastal' for East/West or 'Inland' for North/South, applied to sales.",
+      add("CASE Expressions",
+        "Write a query that shows region and a CASE-based flag 'Coastal' for East/West or 'Inland' for North/South, applied to sales.",
         "Use CASE WHEN region IN ('East','West') THEN 'Coastal' ELSE 'Inland' END AS region_type;",
         ["select", "case", "when", "then", "else", "end", "from", "sales"], "sales",
-        () => datasets.sales.map(s => ({ region: s.region, region_type: (s.region === "East" || s.region === "West") ? "Coastal" : "Inland" })));
+        () => datasets.sales.map(s => ({ region: s.region, region_type: (s.region === "East" || s.region === "West") ?
+            "Coastal" : "Inland" })));
 
-      add("CASE Expressions", "Write a query giving each employee a bonus_eligible flag: 'Yes' if salary < 65000 (support raise), else 'No', using CASE.",
+      add("CASE Expressions",
+        "Write a query giving each employee a bonus_eligible flag: 'Yes' if salary < 65000 (support raise), else 'No', using CASE.",
         "Use CASE WHEN salary < 65000 THEN 'Yes' ELSE 'No' END AS bonus_eligible;",
         ["select", "case", "when", "then", "else", "end", "from", "employees"], "employees",
-        () => datasets.employees.map(e => ({ first_name: e.first_name, salary: e.salary, bonus_eligible: e.salary < 65000 ? "Yes" : "No" })));
+        () => datasets.employees.map(e => ({ first_name: e.first_name, salary: e.salary, bonus_eligible: e.salary <
+            65000 ? "Yes" : "No" })));
     })();
 
     /* ---------- 13. STRING FUNCTIONS (8) ---------- */
-    (function () {
+    (function() {
       add("String Functions", "Write a query to display employee first_name in UPPERCASE.",
         "Use SELECT UPPER(first_name) FROM employees;",
         ["select", "upper", "from", "employees"], "employees",
@@ -1208,7 +1986,8 @@ SELECT ..."></textarea>
         ["select", "lower", "from", "departments"], "departments",
         () => datasets.departments.map(d => ({ name_lower: d.name.toLowerCase() })));
 
-      add("String Functions", "Write a query to concatenate first_name and last_name into a single full_name column.",
+      add("String Functions",
+        "Write a query to concatenate first_name and last_name into a single full_name column.",
         "Use SELECT CONCAT(first_name, ' ', last_name) AS full_name FROM employees;",
         ["select", "concat", "from", "employees"], "employees",
         () => datasets.employees.map(e => ({ full_name: `${e.first_name} ${e.last_name}` })));
@@ -1218,7 +1997,8 @@ SELECT ..."></textarea>
         ["select", "length", "from", "inventory"], "inventory",
         () => datasets.inventory.map(i => ({ product_name: i.product_name, name_length: i.product_name.length })));
 
-      add("String Functions", "Write a query using SUBSTRING to extract the first 3 characters of each employee's email.",
+      add("String Functions",
+        "Write a query using SUBSTRING to extract the first 3 characters of each employee's email.",
         "Use SELECT SUBSTRING(email, 1, 3) FROM employees;",
         ["select", "substring", "from", "employees"], "employees",
         () => datasets.employees.map(e => ({ email_prefix: e.email.substring(0, 3) })));
@@ -1228,19 +2008,21 @@ SELECT ..."></textarea>
         ["select", "from", "employees", "where", "like"], "employees",
         () => datasets.employees.filter(e => e.email.toLowerCase().includes("john")));
 
-      add("String Functions", "Write a query using TRIM concept to clean whitespace from product_name values (assume some may have extra spaces).",
+      add("String Functions",
+        "Write a query using TRIM concept to clean whitespace from product_name values (assume some may have extra spaces).",
         "Use SELECT TRIM(product_name) FROM inventory;",
         ["select", "trim", "from", "inventory"], "inventory",
         () => datasets.inventory.map(i => ({ product_name: i.product_name.trim() })));
 
-      add("String Functions", "Write a query using REPLACE to change all occurrences of 'Widget' to 'Gizmo' in product_name.",
+      add("String Functions",
+        "Write a query using REPLACE to change all occurrences of 'Widget' to 'Gizmo' in product_name.",
         "Use SELECT REPLACE(product_name, 'Widget', 'Gizmo') FROM inventory;",
         ["select", "replace", "from", "inventory"], "inventory",
         () => datasets.inventory.map(i => ({ product_name: i.product_name.replace(/Widget/g, "Gizmo") })));
     })();
 
     /* ---------- 14. DATE FUNCTIONS (8) ---------- */
-    (function () {
+    (function() {
       add("Date Functions", "Write a query to extract the YEAR from each employee's hire_date.",
         "Use SELECT first_name, EXTRACT(YEAR FROM hire_date) AS hire_year FROM employees;",
         ["select", "year", "from", "employees"], "employees",
@@ -1251,7 +2033,8 @@ SELECT ..."></textarea>
         ["select", "from", "employees", "where"], "employees",
         () => datasets.employees.filter(e => e.hire_date >= "2019-01-01"));
 
-      add("Date Functions", "Write a query to find all sales made in Q1 2023 (Jan-Mar) using date filtering.",
+      add("Date Functions",
+        "Write a query to find all sales made in Q1 2023 (Jan-Mar) using date filtering.",
         "Use WHERE sale_date >= '2023-01-01' AND sale_date < '2023-04-01';",
         ["select", "from", "sales", "where"], "sales",
         () => datasets.sales.filter(s => s.sale_date >= "2023-01-01" && s.sale_date < "2023-04-01"));
@@ -1259,18 +2042,21 @@ SELECT ..."></textarea>
       add("Date Functions", "Write a query to find the most recent restock_date among all inventory items.",
         "Use SELECT MAX(restock_date) FROM inventory;",
         ["select", "max", "from", "inventory"], "inventory",
-        () => [{ most_recent_restock: datasets.inventory.reduce((max, i) => i.restock_date > max ? i.restock_date : max, "0000-00-00") }]);
+        () => [{ most_recent_restock: datasets.inventory.reduce((max, i) => i.restock_date > max ? i.restock_date : max,
+            "0000-00-00") }]);
 
       add("Date Functions", "Write a query using MONTH to group total sales amount by month.",
         "Use GROUP BY EXTRACT(MONTH FROM sale_date);",
         ["select", "from", "sales", "group by"], "sales",
         () => {
           const byMonth = {};
-          datasets.sales.forEach(s => { const m = s.sale_date.slice(0, 7); byMonth[m] = (byMonth[m] || 0) + s.amount; });
+          datasets.sales.forEach(s => { const m = s.sale_date.slice(0, 7); byMonth[m] = (byMonth[m] || 0) + s
+              .amount; });
           return Object.entries(byMonth).map(([month, total]) => ({ month, total }));
         });
 
-      add("Date Functions", "Write a query to calculate how many days have passed since each employee's hire_date (assume today is 2023-07-01).",
+      add("Date Functions",
+        "Write a query to calculate how many days have passed since each employee's hire_date (assume today is 2023-07-01).",
         "Use DATEDIFF('2023-07-01', hire_date) AS days_employed;",
         ["select", "from", "employees"], "employees",
         () => {
@@ -1287,69 +2073,86 @@ SELECT ..."></textarea>
         ["select", "from", "inventory", "where"], "inventory",
         () => datasets.inventory.filter(i => i.restock_date < "2023-06-10"));
 
-      add("Date Functions", "Write a query to find the earliest hire_date among employees in each department using GROUP BY and MIN.",
+      add("Date Functions",
+        "Write a query to find the earliest hire_date among employees in each department using GROUP BY and MIN.",
         "Use SELECT department_id, MIN(hire_date) FROM employees GROUP BY department_id;",
         ["select", "min", "from", "employees", "group by"], "employees",
         () => {
           const byDept = {};
           datasets.employees.forEach(e => {
-            if (!byDept[e.department_id] || e.hire_date < byDept[e.department_id]) byDept[e.department_id] = e.hire_date;
+            if (!byDept[e.department_id] || e.hire_date < byDept[e.department_id]) byDept[e.department_id] = e
+              .hire_date;
           });
-          return Object.entries(byDept).map(([department_id, earliest_hire]) => ({ department_id: +department_id, earliest_hire }));
+          return Object.entries(byDept).map(([department_id, earliest_hire]) => ({ department_id: +department_id,
+            earliest_hire }));
         });
     })();
 
     /* ---------- 15. DML (10) ---------- */
-    (function () {
-      add("DML (INSERT/UPDATE/DELETE)", "Write an INSERT statement to add a new employee named 'Tom Reed' to the employees table with a salary of 70000.",
+    (function() {
+      add("DML (INSERT/UPDATE/DELETE)",
+        "Write an INSERT statement to add a new employee named 'Tom Reed' to the employees table with a salary of 70000.",
         "Use INSERT INTO employees (first_name, last_name, salary, ...) VALUES ('Tom', 'Reed', 70000, ...);",
         ["insert into", "employees", "values"], "employees",
-        () => [...datasets.employees.slice(0, 4), { id: 11, first_name: "Tom", last_name: "Reed", department_id: 1, salary: 70000, hire_date: "2023-07-01", manager_id: 5, email: "tom.reed@co.com", city: "New York" }]);
+        () => [...datasets.employees.slice(0, 4), { id: 11, first_name: "Tom", last_name: "Reed", department_id: 1,
+          salary: 70000, hire_date: "2023-07-01", manager_id: 5, email: "tom.reed@co.com", city: "New York" }]);
 
-      add("DML (INSERT/UPDATE/DELETE)", "Write an UPDATE statement to give all employees in department_id 1 a 10% salary raise.",
+      add("DML (INSERT/UPDATE/DELETE)",
+        "Write an UPDATE statement to give all employees in department_id 1 a 10% salary raise.",
         "Use UPDATE employees SET salary = salary * 1.10 WHERE department_id = 1;",
         ["update", "employees", "set", "where"], "employees",
         () => datasets.employees.map(e => e.department_id === 1 ? { ...e, salary: round2(e.salary * 1.10) } : e));
 
-      add("DML (INSERT/UPDATE/DELETE)", "Write a DELETE statement to remove all sales with an amount less than 500.",
+      add("DML (INSERT/UPDATE/DELETE)",
+        "Write a DELETE statement to remove all sales with an amount less than 500.",
         "Use DELETE FROM sales WHERE amount < 500;",
         ["delete from", "sales", "where"], "sales",
         () => datasets.sales.filter(s => s.amount >= 500));
 
-      add("DML (INSERT/UPDATE/DELETE)", "Write an INSERT statement to add a new department 'Support' located in 'Denver' with a budget of 250000.",
+      add("DML (INSERT/UPDATE/DELETE)",
+        "Write an INSERT statement to add a new department 'Support' located in 'Denver' with a budget of 250000.",
         "Use INSERT INTO departments (name, location, budget) VALUES ('Support', 'Denver', 250000);",
         ["insert into", "departments", "values"], "departments",
-        () => [...datasets.departments, { id: 5, name: "Support", location: "Denver", budget: 250000, manager_id: null }]);
+        () => [...datasets.departments, { id: 5, name: "Support", location: "Denver", budget: 250000,
+          manager_id: null }]);
 
-      add("DML (INSERT/UPDATE/DELETE)", "Write an UPDATE statement to restock 'Gadget-Y' (id 104) by increasing its quantity by 50.",
+      add("DML (INSERT/UPDATE/DELETE)",
+        "Write an UPDATE statement to restock 'Gadget-Y' (id 104) by increasing its quantity by 50.",
         "Use UPDATE inventory SET quantity = quantity + 50 WHERE id = 104;",
         ["update", "inventory", "set", "where"], "inventory",
         () => datasets.inventory.map(i => i.id === 104 ? { ...i, quantity: i.quantity + 50 } : i));
 
-      add("DML (INSERT/UPDATE/DELETE)", "Write a DELETE statement to remove inventory items with quantity less than 10.",
+      add("DML (INSERT/UPDATE/DELETE)",
+        "Write a DELETE statement to remove inventory items with quantity less than 10.",
         "Use DELETE FROM inventory WHERE quantity < 10;",
         ["delete from", "inventory", "where"], "inventory",
         () => datasets.inventory.filter(i => i.quantity >= 10));
 
-      add("DML (INSERT/UPDATE/DELETE)", "Write an UPDATE statement to change the region of sale id 4 from 'West' to 'Central'.",
+      add("DML (INSERT/UPDATE/DELETE)",
+        "Write an UPDATE statement to change the region of sale id 4 from 'West' to 'Central'.",
         "Use UPDATE sales SET region = 'Central' WHERE id = 4;",
         ["update", "sales", "set", "where"], "sales",
         () => datasets.sales.map(s => s.id === 4 ? { ...s, region: "Central" } : s));
 
-      add("DML (INSERT/UPDATE/DELETE)", "Write an INSERT statement to log a new sale: employee_id 3, product_id 104, amount 950, quantity 2, region 'East'.",
+      add("DML (INSERT/UPDATE/DELETE)",
+        "Write an INSERT statement to log a new sale: employee_id 3, product_id 104, amount 950, quantity 2, region 'East'.",
         "Use INSERT INTO sales (employee_id, product_id, amount, quantity, region, sale_date) VALUES (3, 104, 950, 2, 'East', '2023-07-01');",
         ["insert into", "sales", "values"], "sales",
-        () => [...datasets.sales, { id: 13, employee_id: 3, product_id: 104, sale_date: "2023-07-01", amount: 950, quantity: 2, region: "East" }]);
+        () => [...datasets.sales, { id: 13, employee_id: 3, product_id: 104, sale_date: "2023-07-01", amount: 950,
+          quantity: 2, region: "East" }]);
 
-      add("DML (INSERT/UPDATE/DELETE)", "Write a DELETE statement to remove employees who have no manager (manager_id IS NULL).",
+      add("DML (INSERT/UPDATE/DELETE)",
+        "Write a DELETE statement to remove employees who have no manager (manager_id IS NULL).",
         "Use DELETE FROM employees WHERE manager_id IS NULL;",
         ["delete from", "employees", "where"], "employees",
         () => datasets.employees.filter(e => e.manager_id !== null));
 
-      add("DML (INSERT/UPDATE/DELETE)", "Write an UPDATE statement to increase unit_price by 5% for all items in the 'Electronics' category.",
+      add("DML (INSERT/UPDATE/DELETE)",
+        "Write an UPDATE statement to increase unit_price by 5% for all items in the 'Electronics' category.",
         "Use UPDATE inventory SET unit_price = unit_price * 1.05 WHERE category = 'Electronics';",
         ["update", "inventory", "set", "where"], "inventory",
-        () => datasets.inventory.map(i => i.category === "Electronics" ? { ...i, unit_price: round2(i.unit_price * 1.05) } : i));
+        () => datasets.inventory.map(i => i.category === "Electronics" ? { ...i, unit_price: round2(i.unit_price *
+            1.05) } : i));
     })();
 
     /* ============================== RENDERING ============================== */
@@ -1358,7 +2161,7 @@ SELECT ..."></textarea>
 
     function renderSidebar() {
       const sidebar = document.getElementById('sidebar');
-      sidebar.innerHTML = '<h3>Exercises</h3>';
+      sidebar.innerHTML = '<h3>📚 Exercises</h3>';
       const cats = [...new Set(EXERCISES.map(e => e.category))];
       cats.forEach(cat => {
         const details = document.createElement('details');
@@ -1383,8 +2186,13 @@ SELECT ..."></textarea>
       });
     }
 
-    function renderDatasetTabs() {
+        function renderDatasetTabs() {
       const tabs = document.getElementById('datasetTabs');
+      if (!tabs) {
+        console.error('datasetTabs not found!');
+        return;
+      }
+      
       tabs.innerHTML = '';
       Object.keys(datasets).forEach((name, i) => {
         const btn = document.createElement('button');
@@ -1402,32 +2210,94 @@ SELECT ..."></textarea>
       const cols = Object.keys(rows[0]);
       let html = '<table><thead><tr>' + cols.map(c => `<th>${c}</th>`).join('') + '</tr></thead><tbody>';
       rows.forEach(r => {
-        html += '<tr>' + cols.map(c => `<td>${r[c] === null || r[c] === undefined ? '<em>NULL</em>' : r[c]}</td>`).join('') + '</tr>';
+        html += '<tr>' + cols.map(c => `<td>${r[c] === null || r[c] === undefined ? '<em>NULL</em>' : r[c]}</td>`)
+          .join('') + '</tr>';
       });
       html += '</tbody></table>';
       return html;
     }
 
-    function showDataset(name, btnEl) {
+       function showDataset(name, btnEl) {
+      const tableWrap = document.getElementById('datasetTableWrap');
+      if (!tableWrap) {
+        console.error('datasetTableWrap not found!');
+        return;
+      }
+      
       document.querySelectorAll('#datasetTabs button').forEach(b => b.classList.remove('active'));
       if (btnEl) btnEl.classList.add('active');
       else document.querySelector(`#datasetTabs button[data-name="${name}"]`)?.classList.add('active');
-      document.getElementById('datasetTableWrap').innerHTML = renderTable(datasets[name]);
+      
+      tableWrap.innerHTML = renderTable(datasets[name]);
     }
 
-    function loadExercise(index) {
+     function updateLearnPanel(category) {
+      // Debug: log what category we're trying to find
+      console.log('Looking for learn content for category:', category);
+      
+      // Direct lookup with exact match
+      let learn = learnContent[category];
+      
+      // If not found, try to find a close match
+      if (!learn) {
+        // Try trimming or removing special characters
+        const cleanCategory = category.replace(/[\(\)]/g, '').trim();
+        if (learnContent[cleanCategory]) {
+          learn = learnContent[cleanCategory];
+        }
+      }
+      
+      // If we found content, display it
+      if (learn) {
+        document.getElementById('learnTopic').textContent = learn.topic;
+        document.getElementById('learnBody').innerHTML = learn.body;
+        console.log('✅ Found learn content for:', category);
+      } else {
+        // Fallback: show generic content with the category name
+        console.warn('⚠️ No learn content found for:', category);
+        document.getElementById('learnTopic').textContent = category || 'Learn SQL';
+        document.getElementById('learnBody').innerHTML = `
+          <div class="learn-section">
+            <p>📖 Learn about <strong>${category}</strong> as you practice. Each exercise includes a mini-lesson to help you understand the concept.</p>
+            <p style="margin-top: 8px;">💡 Tip: Check the hint for help if you get stuck!</p>
+          </div>
+        `;
+      }
+    }
+
+        function loadExercise(index) {
       currentIndex = ((index % EXERCISES.length) + EXERCISES.length) % EXERCISES.length;
       const ex = EXERCISES[currentIndex];
-      document.getElementById('exMeta').textContent = `${ex.category} · Exercise ${ex.id} of ${EXERCISES.length} · dataset: ${ex.dataset}`;
-      document.getElementById('exTitle').textContent = `Exercise #${ex.id}`;
-      document.getElementById('exQuestion').textContent = ex.question;
-      document.getElementById('sqlInput').value = '';
-      document.getElementById('hintBox').textContent = ex.hint;
-      document.getElementById('hintBox').classList.add('hidden');
-      document.getElementById('resultBox').innerHTML = '';
+      
+      // Safety checks for elements
+      const metaEl = document.getElementById('exMeta');
+      const titleEl = document.getElementById('exTitle');
+      const questionEl = document.getElementById('exQuestion');
+      const inputEl = document.getElementById('sqlInput');
+      const hintBoxEl = document.getElementById('hintBox');
+      const resultBoxEl = document.getElementById('resultBox');
+      
+      if (metaEl) metaEl.textContent = `${ex.category} · Exercise ${ex.id} of ${EXERCISES.length} · dataset: ${ex.dataset}`;
+      if (titleEl) titleEl.textContent = `Exercise #${ex.id}`;
+      if (questionEl) questionEl.textContent = ex.question;
+      if (inputEl) inputEl.value = '';
+      if (hintBoxEl) {
+        hintBoxEl.textContent = ex.hint;
+        hintBoxEl.classList.add('hidden');
+      }
+      if (resultBoxEl) resultBoxEl.innerHTML = '';
+      
+      // Show the dataset
       showDataset(ex.dataset);
+      
+      // Update sidebar active state
       document.querySelectorAll('.cat-group li button').forEach(b => b.classList.toggle('active', +b.dataset.id === ex.id));
+      
+      // Update progress
       updateProgressLine();
+
+      // Update Learn Panel
+      updateLearnPanel(ex.category);
     }
 
     function updateProgressLine() {
@@ -1443,16 +2313,20 @@ SELECT ..."></textarea>
         resultBox.innerHTML = '<div class="status bad">⚠️ Please type a SQL query before running.</div>';
         return;
       }
-      if (!ex.attempted) { ex.attempted = true; attemptedCount++; updateProgressLine(); }
+      if (!ex.attempted) { ex.attempted = true;
+        attemptedCount++;
+        updateProgressLine(); }
       const q = query.toLowerCase();
       const passed = ex.keywords.every(k => q.includes(k));
       const rows = ex.getResult();
       let html = '';
       if (passed) {
-        html += `<div class="status good">✅ Looks good! Your query includes the expected SQL elements. Simulated result:</div>`;
+        html +=
+          `<div class="status good">✅ Looks good! Your query includes the expected SQL elements. Simulated result:</div>`;
       } else {
         const missing = ex.keywords.filter(k => !q.includes(k));
-        html += `<div class="status bad">⚠️ Your query may be missing: ${missing.join(', ')}. Check the hint. Here's the expected result for reference:</div>`;
+        html +=
+          `<div class="status bad">⚠️ Your query may be missing: ${missing.join(', ')}. Check the hint. Here's the expected result for reference:</div>`;
       }
       html += renderTable(rows);
       resultBox.innerHTML = html;
@@ -1470,6 +2344,7 @@ SELECT ..."></textarea>
     renderDatasetTabs();
     loadExercise(0);
   </script>
+
 </body>
 
 </html>
