@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Learn SQL – Free Tutorial & Notes</title>
+    <style>
+        /* ── global reset & base (matching practice page theme) ── */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #f4f6f9;
+            color: #22293a;
+            line-height: 1.6;
+        }
+        a {
+            color: #3a6df0;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* ── header ── */
+        header {
+            background: linear-gradient(135deg, #2a52c0, #3a6df0);
+            color: #fff;
+            padding: 1.2rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        header h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+        header h1 span {
+            font-weight: 300;
+            opacity: 0.8;
+        }
+        header nav a {
+            color: #fff;
+            margin-left: 1.5rem;
+            font-weight: 500;
+            opacity: 0.85;
+            transition: opacity 0.2s;
+            text-decoration: none;
+        }
+        header nav a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+        header nav a.cta {
+            background: rgba(255,255,255,0.2);
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+        }
+
+        /* ── layout: sidebar + main ── */
+        .learn-layout {
+            display: flex;
+            gap: 2rem;
+            margin: 2rem 0 4rem;
+            align-items: flex-start;
+        }
+
+        /* ── sidebar (chapter navigation) ── */
+        .sidebar {
+            width: 280px;
+            flex-shrink: 0;
+            background: #fff;
+            border: 1px solid #dde2ea;
+            border-radius: 12px;
+            padding: 1.2rem 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            position: sticky;
+            top: 2rem;
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
+        }
+        .sidebar h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #8891a5;
+            padding: 0 1.2rem 0.6rem;
+            border-bottom: 1px solid #eef1f7;
+        }
+        .sidebar ul {
+            list-style: none;
+            margin: 0.5rem 0;
+        }
+        .sidebar li a {
+            display: block;
+            padding: 0.45rem 1.2rem;
+            font-size: 0.9rem;
+            color: #3a4256;
+            border-left: 3px solid transparent;
+            transition: background 0.15s, border-color 0.15s;
+        }
+        .sidebar li a:hover {
+            background: #eef1f7;
+            text-decoration: none;
+            border-left-color: #3a6df0;
+        }
+        .sidebar li a.active {
+            background: #eef1f7;
+            border-left-color: #3a6df0;
+            font-weight: 600;
+            color: #2a52c0;
+        }
+        .sidebar .chapter-badge {
+            display: inline-block;
+            font-size: 0.65rem;
+            background: #dde2ea;
+            color: #495066;
+            border-radius: 20px;
+            padding: 0.1rem 0.6rem;
+            margin-left: 0.4rem;
+            font-weight: 400;
+        }
+        .sidebar .unit-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: #8891a5;
+            padding: 0.8rem 1.2rem 0.2rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+        }
+
+        /* ── main content ── */
+        .main-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        /* ── lesson card ── */
+        .lesson-card {
+            background: #fff;
+            border: 1px solid #dde2ea;
+            border-radius: 14px;
+            padding: 2rem 2.2rem;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+            margin-bottom: 2rem;
+        }
+        .lesson-card .breadcrumb {
+            font-size: 0.8rem;
+            color: #8891a5;
+            margin-bottom: 0.5rem;
+        }
+        .lesson-card .breadcrumb span {
+            color: #3a6df0;
+        }
+        .lesson-card h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            color: #22293a;
+        }
+        .lesson-card .subtitle {
+            font-size: 1rem;
+            color: #495066;
+            margin-bottom: 1.2rem;
+        }
+        .lesson-card .divider {
+            height: 1px;
+            background: #eef1f7;
+            margin: 1.2rem 0;
+        }
+
+        /* ── content blocks ── */
+        .content-block {
+            margin: 1.6rem 0;
+        }
+        .content-block h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            color: #22293a;
+        }
+        .content-block p {
+            color: #3a4256;
+            margin-bottom: 0.8rem;
+        }
+        .content-block ul, .content-block ol {
+            padding-left: 1.6rem;
+            color: #3a4256;
+            margin-bottom: 0.8rem;
+        }
+        .content-block li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* ── code blocks ── */
+        pre {
+            background: #1e2130;
+            color: #e6e9f2;
+            padding: 1.2rem 1.5rem;
+            border-radius: 10px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin: 0.8rem 0;
+            border: 1px solid #333752;
+        }
+        pre .comment {
+            color: #6a7a8a;
+        }
+        pre .keyword {
+            color: #ff79c6;
+        }
+        pre .string {
+            color: #f1fa8c;
+        }
+        pre .func {
+            color: #50fa7b;
+        }
+        pre .table {
+            color: #8be9fd;
+        }
+        .code-caption {
+            font-size: 0.85rem;
+            color: #8891a5;
+            margin-top: -0.4rem;
+            margin-bottom: 0.8rem;
+            font-style: italic;
+        }
+
+        /* ── example output ── */
+        .output-box {
+            background: #f8f9fc;
+            border: 1px solid #dde2ea;
+            border-radius: 8px;
+            padding: 0.8rem 1.2rem;
+            font-family: 'Consolas', monospace;
+            font-size: 0.85rem;
+            color: #22293a;
+            overflow-x: auto;
+            margin: 0.8rem 0;
+        }
+        .output-box .label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: #8891a5;
+            letter-spacing: 0.04em;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* ── book resources ── */
+        .book-resources {
+            background: #eef1f7;
+            border: 1px solid #dde2ea;
+            border-radius: 12px;
+            padding: 1.4rem 1.8rem;
+            margin: 1.6rem 0;
+        }
+        .book-resources h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+            color: #22293a;
+        }
+        .book-resources ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem 2rem;
+        }
+        .book-resources li {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.9rem;
+        }
+        .book-resources li .badge {
+            font-size: 0.65rem;
+            background: #3a6df0;
+            color: #fff;
+            border-radius: 20px;
+            padding: 0.1rem 0.6rem;
+            font-weight: 600;
+        }
+        .book-resources li a {
+            color: #2a52c0;
+            font-weight: 500;
+        }
+        .book-resources li a:hover {
+            text-decoration: underline;
+        }
+
+        /* ── navigation between lessons ── */
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid #eef1f7;
+        }
+        .lesson-nav a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-weight: 500;
+            color: #3a6df0;
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            border: 1px solid #dde2ea;
+            background: #fff;
+            transition: background 0.15s, border-color 0.15s;
+        }
+        .lesson-nav a:hover {
+            background: #eef1f7;
+            border-color: #3a6df0;
+            text-decoration: none;
+        }
+        .lesson-nav .disabled {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        /* ── footer ── */
+        footer {
+            border-top: 1px solid #dde2ea;
+            padding: 2rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.9rem;
+            color: #8891a5;
+            margin-top: 2rem;
+        }
+        footer a {
+            color: #3a4256;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.15s;
+        }
+        footer a:hover {
+            border-bottom-color: #3a6df0;
+            text-decoration: none;
+        }
+        footer .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        /* ── responsive ── */
+        @media (max-width: 850px) {
+            .learn-layout {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                position: static;
+                max-height: none;
+                padding: 0.8rem 0;
+            }
+            .sidebar ul {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.2rem;
+                padding: 0 0.8rem;
+            }
+            .sidebar li a {
+                border-left: none;
+                border-bottom: 2px solid transparent;
+                padding: 0.3rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            .sidebar li a:hover,
+            .sidebar li a.active {
+                border-left: none;
+                border-bottom-color: #3a6df0;
+            }
+            .sidebar .unit-label {
+                display: none;
+            }
+            .sidebar h3 {
+                padding: 0 0.8rem 0.4rem;
+            }
+            .lesson-card {
+                padding: 1.2rem;
+            }
+            header {
+                flex-direction: column;
+                text-align: center;
+                padding: 1rem;
+            }
+            header nav a {
+                margin: 0 0.6rem;
+            }
+            .book-resources ul {
+                flex-direction: column;
+                gap: 0.6rem;
+            }
+            .lesson-nav {
+                flex-wrap: wrap;
+                gap: 0.8rem;
+                justify-content: center;
+            }
+        }
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 0.8rem;
+            }
+            .lesson-card h2 {
+                font-size: 1.4rem;
+            }
+            pre {
+                font-size: 0.75rem;
+                padding: 0.8rem;
+            }
+        }
+
+        /* ── scrollbar ── */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c7cede;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f4f6f9;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ─── HEADER ─── -->
+    <header>
+        <h1>📘 Learn<span>SQL</span>.dev</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="learn.html" style="opacity:1;font-weight:600;">Learn</a>
+            <a href="practice.html">Practice</a>
+            <a href="practice.html" class="cta">▶ Start Practicing</a>
+        </nav>
+    </header>
+
+    <div class="container">
+
+        <!-- ─── LAYOUT ─── -->
+        <div class="learn-layout">
+
+            <!-- ─── SIDEBAR ─── -->
+            <aside class="sidebar" id="sidebar">
+                <h3>📚 Chapters</h3>
+                <div class="unit-label">▸ Unit 1 · Foundations</div>
+                <ul>
+                    <li><a href="#" data-chapter="0" class="active">1. What is SQL?</a></li>
+                    <li><a href="#" data-chapter="1">2. SELECT &amp; FROM</a></li>
+                    <li><a href="#" data-chapter="2">3. WHERE &amp; Filtering</a></li>
+                    <li><a href="#" data-chapter="3">4. ORDER BY &amp; LIMIT</a></li>
+                </ul>
+                <div class="unit-label">▸ Unit 2 · Core Skills</div>
+                <ul>
+                    <li><a href="#" data-chapter="4">5. Joins (INNER, LEFT, RIGHT)</a></li>
+                    <li><a href="#" data-chapter="5">6. GROUP BY &amp; Aggregates</a></li>
+                    <li><a href="#" data-chapter="6">7. HAVING &amp; Subqueries</a></li>
+                </ul>
+                <div class="unit-label">▸ Unit 3 · Advanced</div>
+                <ul>
+                    <li><a href="#" data-chapter="7">8. Window Functions</a></li>
+                    <li><a href="#" data-chapter="8">9. CTEs (WITH)</a></li>
+                    <li><a href="#" data-chapter="9">10. CASE &amp; String Functions</a></li>
+                </ul>
+                <div class="unit-label">▸ Unit 4 · DML &amp; Design</div>
+                <ul>
+                    <li><a href="#" data-chapter="10">11. INSERT / UPDATE / DELETE</a></li>
+                    <li><a href="#" data-chapter="11">12. Table Design &amp; Normalization</a></li>
+                </ul>
+            </aside>
+
+            <!-- ─── MAIN CONTENT ─── -->
+            <main class="main-content" id="mainContent">
+
+                <!-- lessons will be rendered here by JavaScript -->
+                <div id="lessonContainer"></div>
+
+                <!-- ─── BOOK RESOURCES (shown on all lessons) ─── -->
+                <div class="book-resources">
+                    <h4>📖 Free SQL Books &amp; Resources</h4>
+                    <ul>
+                        <li>
+                            <span class="badge">PDF</span>
+                            <a href="https://www.nostarch.com/practicalSQL" target="_blank" rel="noopener">Practical SQL</a>
+                            <span style="color:#8891a5;font-size:0.8rem;">— Anthony DeBarros (No Starch Press)</span>
+                        </li>
+                        <li>
+                            <span class="badge">Free</span>
+                            <a href="https://dev.runestone.academy/ns/books/published/practical_db/index.html" target="_blank" rel="noopener">A Practical Introduction to Databases</a>
+                            <span style="color:#8891a5;font-size:0.8rem;">— Runestone Academy</span>
+                        </li>
+                        <li>
+                            <span class="badge">PDF</span>
+                            <a href="https://www.freecodecamp.org/news/an-animated-introduction-to-sql-learn-to-query-relational-databases/" target="_blank" rel="noopener">Animated Introduction to SQL</a>
+                            <span style="color:#8891a5;font-size:0.8rem;">— freeCodeCamp</span>
+                        </li>
+                        <li>
+                            <span class="badge">Reference</span>
+                            <a href="https://www.w3schools.com/sql/" target="_blank" rel="noopener">W3Schools SQL Tutorial</a>
+                            <span style="color:#8891a5;font-size:0.8rem;">— interactive reference</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </main>
+        </div>
+
+        <!-- ─── FOOTER ─── -->
+        <footer>
+            <span>© 2026 LearnSQL.dev · free &amp; open for everyone</span>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="learn.html">Learn</a>
+                <a href="practice.html">Practice</a>
+                <a href="https://github.com" target="_blank">GitHub</a>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        // ─── LESSON DATA ────────────────────────────────────────────────
+        const lessons = [{
+            id: 0,
+            chapter: "1. What is SQL?",
+            unit: "Unit 1 · Foundations",
+            subtitle: "The language of databases",
+            content: `
+                <div class="content-block">
+                    <h3>What is SQL?</h3>
+                    <p><strong>SQL</strong> (Structured Query Language) is a standard language for storing, manipulating, and retrieving data in relational databases. It is used by almost every modern application — from banking systems to social media platforms [citation:1][citation:11].</p>
+                    <p>SQL allows you to:</p>
+                    <ul>
+                        <li><strong>Query</strong> data — ask questions like "What are the top 10 best-selling products?"</li>
+                        <li><strong>Manipulate</strong> data — insert, update, or delete records</li>
+                        <li><strong>Define</strong> data structures — create tables, indexes, and relationships</li>
+                        <li><strong>Control</strong> access — manage user permissions</li>
+                    </ul>
+                    <p>SQL works with many database systems: MySQL, PostgreSQL, SQL Server, Oracle, SQLite, and more. While each has slight variations, the core syntax is universal [citation:1].</p>
+                </div>
+                <div class="content-block">
+                    <h3>Why Learn SQL?</h3>
+                    <ul>
+                        <li><strong>In-demand skill</strong> — SQL is consistently ranked among the top skills for data analysts, developers, and engineers.</li>
+                        <li><strong>Universal</strong> — once you learn SQL, you can work with almost any database.</li>
+                        <li><strong>Powerful</strong> — a single query can process millions of rows in seconds.</li>
+                        <li><strong>Practical</strong> — you can immediately apply it to real data.</li>
+                    </ul>
+                </div>
+                <div class="content-block">
+                    <h3>Your First Query</h3>
+                    <p>Let's see SQL in action. This query retrieves all rows from a table called <code>customers</code>:</p>
+                    <pre><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="table">customers</span>;</pre>
+                    <div class="code-caption">The <code>*</code> means "all columns".</div>
+                    <div class="output-box">
+                        <div class="label">📊 Example Output</div>
+                        <pre style="background:transparent;color:#22293a;padding:0.4rem 0;border:none;font-size:0.85rem;">
+id | name          | city
+---|---------------|----------
+1  | Alice Smith   | New York
+2  | Bob Johnson   | Boston
+3  | Charlie Brown | Chicago</pre>
+                    </div>
+                    <p>Every lesson includes examples like this. When you're ready, head to the <a href="practice.html">Practice area</a> to write your own queries!</p>
+                </div>
+            `
+        }, {
+            id: 1,
+            chapter: "2. SELECT &amp; FROM",
+            unit: "Unit 1 · Foundations",
+            subtitle: "Retrieving data from tables",
+            content: `
+                <div class="content-block">
+                    <h3>The SELECT Statement</h3>
+                    <p><code>SELECT</code> is the most frequently used SQL command. It tells the database <em>which columns</em> you want to retrieve. <code>FROM</code> tells the database <em>which table</em> to pull from [citation:1][citation:4].</p>
+                    <p>Basic syntax:</p>
+                    <pre><span class="keyword">SELECT</span> column1, column2 <span class="keyword">FROM</span> <span class="table">table_name</span>;</pre>
+                </div>
+                <div class="content-block">
+                    <h3>Selecting All Columns</h3>
+                    <p>Use <code>*</code> as a shortcut for "all columns":</p>
+                    <pre><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="table">employees</span>;</pre>
+                    <div class="output-box">
+                        <div class="label">📊 Example Output</div>
+                        <pre style="background:transparent;color:#22293a;padding:0.4rem 0;border:none;font-size:0.85rem;">
+id | first_name | last_name | salary
+---|------------|-----------|--------
+1  | John       | Smith     | 65000
+2  | Sara       | Johnson   | 72000
+3  | Mike       | Brown     | 58000</pre>
+                    </div>
+                </div>
+                <div class="content-block">
+                    <h3>Selecting Specific Columns</h3>
+                    <p>List only the columns you need — this is more efficient and clearer:</p>
+                    <pre><span class="keyword">SELECT</span> first_name, last_name, salary <span class="keyword">FROM</span> <span class="table">employees</span>;</pre>
+                    <div class="code-caption">Returns only the first_name, last_name, and salary columns.</div>
+                </div>
+                <div class="content-block">
+                    <h3>Using Aliases</h3>
+                    <p>You can rename columns in your output using <code>AS</code>:</p>
+                    <pre><span class="keyword">SELECT</span> first_name <span class="keyword">AS</span> "First", last_name <span class="keyword">AS</span> "Last" <span class="keyword">FROM</span> <span class="table">employees</span>;</pre>
+                    <div class="code-caption">The output will show column headers "First" and "Last".</div>
+                </div>
+            `
+        }, {
+            id: 2,
+            chapter: "3. WHERE &amp; Filtering",
+            unit: "Unit 1 · Foundations",
+            subtitle: "Narrowing down your results",
+            content: `
+                <div class="content-block">
+                    <h3>The WHERE Clause</h3>
+                    <p><code>WHERE</code> filters rows based on a condition. Only rows that meet the condition are returned [citation:1][citation:4].</p>
+                    <pre><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="table">employees</span> <span class="keyword">WHERE</span> salary > 60000;</pre>
+                    <div class="code-caption">Returns employees earning more than 60,000.</div>
+                </div>
+                <div class="content-block">
+                    <h3>Common Operators</h3>
+                    <ul>
+                        <li><code>=</code> — equal to</li>
+                        <li><code>&gt;</code> — greater than</li>
+                        <li><code>&lt;</code> — less than</li>
+                        <li><code>&gt;=</code> — greater than or equal</li>
+                        <li><code>&lt;=</code> — less than or equal</li>
+                        <li><code>&lt;&gt;</code> or <code>!=</code> — not equal</li>
+                        <li><code>LIKE</code> — pattern matching (e.g., <code>'%Smith%'</code>)</li>
+                        <li><code>IN</code> — matches any value in a list</li>
+                        <li><code>BETWEEN</code> — within a range</li>
+                    </ul>
+                </div>
+                <div class="content-block">
+                    <h3>Combining Conditions</h3>
+                    <p>Use <code>AND</code> and <code>OR</code> to combine multiple conditions:</p>
+                    <pre><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="table">employees</span>
+<span class="keyword">WHERE</span> department_id = 1 <span class="keyword">AND</span> salary >= 60000;</pre>
+                    <div class="code-caption">Employees in department 1 earning 60,000 or more.</div>
+                </div>
+                <div class="content-block">
+                    <h3>NULL Values</h3>
+                    <p>Use <code>IS NULL</code> or <code>IS NOT NULL</code> to check for missing data:</p>
+                    <pre><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="table">employees</span> <span class="keyword">WHERE</span> manager_id <span class="keyword">IS NULL</span>;</pre>
+                    <div class="code-caption">Finds employees who don't have a manager (top-level).</div>
+                </div>
+            `
+        }, {
+            id: 3,
+            chapter: "4. ORDER BY &amp; LIMIT",
+            unit: "Unit 1 · Foundations",
+            subtitle: "Sorting and limiting results",
+            content: `
+                <div class="content-block">
+                    <h3>ORDER BY</h3>
+                    <p>Sort your results by one or more columns. Use <code>ASC</code> (ascending) or <code>DESC</code> (descending) [citation:1].</p>
+                    <pre><span class="keyword">SELECT</span> first_name, salary <span class="keyword">FROM</span> <span class="table">employees</span>
+<span class="keyword">ORDER BY</span> salary <span class="keyword">DESC</span>;</pre>
+                    <div class="code-caption">Highest earners first.</div>
+                </div>
+                <div class="content-block">
+                    <h3>Sorting by Multiple Columns</h3>
+                    <pre><span class="keyword">SELECT</span> first_name, department_id, salary <span class="keyword">FROM</span> <span class="table">employees</span>
+<span class="keyword">ORDER BY</span> department_id <span class="keyword">ASC</span>, salary <span class="keyword">DESC</span>;</pre>
+                    <div class="code-caption">Sort by department first, then by highest salary within each department.</div>
+                </div>
+                <div class="content-block">
+                    <h3>LIMIT</h3>
+                    <p>Restrict the number of rows returned — useful for previewing data:</p>
+                    <pre><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="table">employees</span> <span class="keyword">ORDER BY</span> salary <span class="keyword">DESC</span> <span class="keyword">LIMIT</span> 5;</pre>
+                    <div class="code-caption">Top 5 highest-paid employees.</div>
+                </div>
+                <div class="content-block">
+                    <h3>OFFSET (Pagination)</h3>
+                    <p>Skip a number of rows before starting to return results:</p>
+                    <pre><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> <span class="table">employees</span> <span class="keyword">ORDER BY</span> id <span class="keyword">LIMIT</span> 10 <span class="keyword">OFFSET</span> 10;</pre>
+                    <div class="code-caption">Rows 11–20 (second page of 10).</div>
+                </div>
+            `
+        }, {
+            id: 4,
+            chapter: "5. Joins (INNER, LEFT, RIGHT)",
+            unit: "Unit 2 · Core Skills",
+            subtitle: "Combining data from multiple tables",
+            content: `
+                <div class="content-block">
+                    <h3>What is a JOIN?</h3>
+                    <p>In a relational database, data is spread across multiple tables. <strong>JOIN</strong> lets you combine them based on related columns [citation:1][citation:4].</p>
+                </div>
+                <div class="content-block">
+                    <h3>INNER JOIN</h3>
+                    <p>Returns only rows where there's a match in <em>both</em> tables:</p>
+                    <pre><span class="keyword">SELECT</span> e.first_name, d.name <span class="keyword">AS</span> department
+<span class="keyword">FROM</span> <span class="table">employees</span> e
+<span class="keyword">INNER JOIN</span> <span class="table">departments</span> d <span class="keyword">ON</span> e.department_id = d.id;</pre>
+                    <div class="code-caption">Each employee's first name and their department name.</div>
+                </div>
+                <div class="content-block">
+                    <h3>LEFT JOIN</h3>
+                    <p>Returns all rows from the <em>left</em> table, even if there's no match in the right table:</p>
+                    <pre><span class="keyword">SELECT</span> e.first_name, d.name <span class="keyword">AS</span> department
+<span class="keyword">FROM</span> <span class="table">employees</span> e
+<span class="keyword">LEFT JOIN</span> <span class="table">departments</span> d <span class="keyword">ON</span> e.department_id = d.id;</pre>
+                    <div class="code-caption">All employees are shown; if a department is missing, the department column will be <code>NULL</code>.</div>
+                </div>
+                <div class="content-block">
+                    <h3>RIGHT JOIN</h3>
+                    <p>Returns all rows from the <em>right</em> table, even if there's no match in the left table.</p>
+                    <pre><span class="keyword">SELECT</span> e.first_name, d.name <span class="keyword">AS</span> department
+<span class="keyword">FROM</span> <span class="table">employees</span> e
+<span class="keyword">RIGHT JOIN</span> <span class="table">departments</span> d <span class="keyword">ON</span> e.department_id = d.id;</pre>
+                    <div class="code-caption">All departments are shown; employees without a matching department will have <code>NULL</code> for first_name.</div>
+                </div>
+            `
+        }, {
+            id: 5,
+            chapter: "6. GROUP BY &amp; Aggregates",
+            unit: "Unit 2 · Core Skills",
+            subtitle: "Summarizing data",
+            content: `
+                <div class="content-block">
+                    <h3>Aggregate Functions</h3>
+                    <p>These functions calculate a single value from a group of rows [citation:1][citation:4]:</p>
+                    <ul>
+                        <li><code>COUNT()</code> — number of rows</li>
+                        <li><code>SUM()</code> — total of a numeric column</li>
+                        <li><code>AVG()</code> — average of a numeric column</li>
+                        <li><code>MIN()</code> — minimum value</li>
+                        <li><code>MAX()</code> — maximum value</li>
+                    </ul>
+                </div>
+                <div class="content-block">
+                    <h3>GROUP BY</h3>
+                    <p>Groups rows that have the same values in specified columns, then applies aggregate functions to each group [citation:4].</p>
+                    <pre><span class="keyword">SELECT</span> department_id, <span class="func">AVG</span>(salary) <span class="keyword">AS</span> avg_salary
+<span class="keyword">FROM</span> <span class="table">employees</span>
+<span class="keyword">GROUP BY</span> department_id;</pre>
+                    <div class="code-caption">Average salary for each department.</div>
+                </div>
+                <div class="content-block">
+                    <h3>Example with COUNT</h3>
+                    <pre><span class="keyword">SELECT</span> department_id, <span class="func">COUNT</span>(*) <span class="keyword">AS</span> employee_count
+<span class="keyword">FROM</span> <span class="table">employees</span>
+<span class="keyword">GROUP BY</span> department_id;</pre>
+                    <div class="code-caption">Number of employees in each department.</div>
+                </div>
+            `
+        }, {
+            id: 6,
+            chapter: "7. HAVING &amp; Subqueries",
+            unit: "Unit 2 · Core Skills",
+            subtitle: "Filtering groups and nested queries",
+            content: `
+                <div class="content-block">
+                    <h3>HAVING — Filtering Groups</h3>
+                    <p><code>WHERE</code> filters rows before grouping. <code>HAVING</code> filters groups after grouping [citation:1].</p>
+                    <pre><span class="keyword">SELECT</span> department_id, <span class="func">AVG</span>(salary) <span class="keyword">AS</span> avg_salary
+<span class="keyword">FROM</span> <span class="table">employees</span>
+<span class="keyword">GROUP BY</span> department_id
+<span class="keyword">HAVING</span> <span class="func">AVG</span>(salary) > 65000;</pre>
+                    <div class="code-caption">Only departments with an average salary above 65,000.</div>
+                </div>
+                <div class="content-block">
+                    <h3>Subqueries</h3>
+                    <p>A <strong>subquery</strong> is a query inside another query. It can be used in <code>WHERE</code>, <code>FROM</code>, or <code>SELECT</code> [citation:4].</p>
+                    <pre><span class="keyword">SELECT</span> first_name, salary
+<span class="keyword">FROM</span> <span class="table">employees</span>
+<span class="keyword">WHERE</span> salary > (<span class="keyword">SELECT</span> <span class="func">AVG</span>(salary) <span class="keyword">FROM</span> <span class="table">employees</span>);</pre>
+                    <div class="code-caption">Employees earning above the company average.</div>
+                </div>
+                <div class="content-block">
+                    <h3>Subquery with IN</h3>
+                    <pre><span class="keyword">SELECT</span> first_name
+<span class="keyword">FROM</span> <span class="table">employees</span>
+<span class="keyword">WHERE</span> department_id <span class="keyword">IN</span> (
+    <span class="keyword">SELECT</span> id <span class="keyword">FROM</span> <span class="table">departments</span> <span class="keyword">WHERE</span> budget > 400000
+);</pre>
+                    <div class="code-caption">Employees in departments with a budget over 400,000.</div>
+                </div>
+            `
+        }, {
+            id: 7,
+            chapter: "8. Window Functions",
+            unit: "Unit 3 · Advanced",
+            subtitle: "Advanced analytics without grouping",
+            content: `
+                <div class="content-block">
+                    <h3>What are Window Functions?</h3>
+                    <p>Window functions perform calculations across a set of rows related to the current row — without collapsing them into a single group like <code>GROUP BY</code> does [citation:4][citation:7].</p>
+                    <p>They are incredibly powerful for ranking, running totals, and moving averages.</p>
+                </div>
+                <div class="content-block">
+                    <h3>ROW_NUMBER()</h3>
+                    <p>Assigns a unique sequential number to each row within a partition:</p>
+                    <pre><span class="keyword">SELECT</span> first_name, salary,
+    <span class="func">ROW_NUMBER</span>() <span class="keyword">OVER</span> (<span class="keyword">ORDER BY</span> salary <span class="keyword">DESC</span>) <span class="keyword">AS</span> rank
+<span class="keyword">FROM</span> <span class="table">employees</span>;</pre>
+                    <div class="code-caption">Rank employees by salary (1 = highest).</div>
+                </div>
+                <div class="content-block">
+                    <h3>RANK() vs DENSE_RANK()</h3>
+                    <ul>
+                        <li><code>RANK()</code> — skips ranks after ties (e.g., 1, 2, 2, 4)</li>
+                        <li><code>DENSE_RANK()</code> — no gaps (e.g., 1, 2, 2, 3)</li>
+                    </ul>
+                    <pre><span class="keyword">SELECT</span> first_name, salary,
+    <span class="func">RANK</span>() <span class="keyword">OVER</span> (<span class="keyword">PARTITION BY</span> department_id <span class="keyword">ORDER BY</span> salary <span class="keyword">DESC</span>) <span class="keyword">AS</span> dept_rank
+<span class="keyword">FROM</span> <span class="table">employees</span>;</pre>
+                    <div class="code-caption">Rank employees within each department by salary.</div>
+                </div>
+                <div class="content-block">
+                    <h3>Running Totals with SUM() OVER</h3>
+                    <pre><span class="keyword">SELECT</span> sale_date, amount,
+    <span class="func">SUM</span>(amount) <span class="keyword">OVER</span> (<span class="keyword">ORDER BY</span> sale_date) <span class="keyword">AS</span> running_total
+<span class="keyword">FROM</span> <span class="table">sales</span>;</pre>
+                    <div class="code-caption">Cumulative sales amount over time.</div>
+                </div>
+            `
+        }, {
+            id: 8,
+            chapter: "9. CTEs (WITH)",
+            unit: "Unit 3 · Advanced",
+            subtitle: "Common Table Expressions for cleaner queries",
+            content: `
+                <div class="content-block">
+                    <h3>What is a CTE?</h3>
+                    <p>A <strong>CTE</strong> (Common Table Expression) creates a temporary named result set that you can reference within a query. It makes complex queries easier to read and write [citation:4].</p>
+                </div>
+                <div class="content-block">
+                    <h3>Basic CTE Syntax</h3>
+                    <pre><span class="keyword">WITH</span> dept_avg <span class="keyword">AS</span> (
+    <span class="keyword">SELECT</span> department_id, <span class="func">AVG</span>(salary) <span class="keyword">AS</span> avg_sal
+    <span class="keyword">FROM</span> <span class="table">employees</span>
+    <span class="keyword">GROUP BY</span> department_id
+)
+<span class="keyword">SELECT</span> d.name, da.avg_sal
+<span class="keyword">FROM</span> <span class="table">departments</span> d
+<span class="keyword">JOIN</span> dept_avg da <span class="keyword">ON</span> d.id = da.department_id
+<span class="keyword">WHERE</span> da.avg_sal > 65000;</pre>
+                    <div class="code-caption">Departments with average salary above 65,000.</div>
+                </div>
+                <div class="content-block">
+                    <h3>Multiple CTEs</h3>
+                    <p>You can chain multiple CTEs together:</p>
+                    <pre><span class="keyword">WITH</span> dept_avg <span class="keyword">AS</span> (...),
+    high_depts <span class="keyword">AS</span> (
+        <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> dept_avg <span class="keyword">WHERE</span> avg_sal > 65000
+    )
+<span class="keyword">SELECT</span> * <span class="keyword">FROM</span> high_depts;</pre>
+                    <div class="code-caption">CTEs make complex queries modular and self-documenting.</div>
+                </div>
+            `
+        }, {
+            id: 9,
+            chapter: "10. CASE &amp; String Functions",
+            unit: "Unit 3 · Advanced",
+            subtitle: "Conditional logic and text manipulation",
+            content: `
+                <div class="content-block">
+                    <h3>CASE — Conditional Logic</h3>
+                    <p><code>CASE</code> works like an if-then-else statement in SQL [citation:1].</p>
+                    <pre><span class="keyword">SELECT</span> first_name, salary,
+    <span class="keyword">CASE</span>
+        <span class="keyword">WHEN</span> salary > 80000 <span class="keyword">THEN</span> 'High'
+        <span class="keyword">WHEN</span> salary >= 60000 <span class="keyword">THEN</span> 'Medium'
+        <span class="keyword">ELSE</span> 'Low'
+    <span class="keyword">END</span> <span class="keyword">AS</span> salary_band
+<span class="keyword">FROM</span> <span class="table">employees</span>;</pre>
+                    <div class="code-caption">Categorizes employees by salary level.</div>
+                </div>
+                <div class="content-block">
+                    <h3>Common String Functions</h3>
+                    <ul>
+                        <li><code>UPPER(text)</code> — convert to uppercase</li>
+                        <li><code>LOWER(text)</code> — convert to lowercase</li>
+                        <li><code>LENGTH(text)</code> — number of characters</li>
+                        <li><code>SUBSTRING(text, start, length)</code> — extract part of a string</li>
+                        <li><code>CONCAT(text1, text2)</code> — join strings together</li>
+                        <li><code>TRIM(text)</code> — remove leading/trailing spaces</li>
+                    </ul>
+                </div>
+                <div class="content-block">
+                    <h3>Example: CONCAT</h3>
+                    <pre><span class="keyword">SELECT</span> <span class="func">CONCAT</span>(first_name, ' ', last_name) <span class="keyword">AS</span> full_name
+<span class="keyword">FROM</span> <span class="table">employees</span>;</pre>
+                    <div class="code-caption">Combines first and last name into a single column.</div>
+                </div>
+            `
+        }, {
+            id: 10,
+            chapter: "11. INSERT / UPDATE / DELETE",
+            unit: "Unit 4 · DML &amp; Design",
+            subtitle: "Modifying data in tables",
+            content: `
+                <div class="content-block">
+                    <h3>INSERT — Adding Data</h3>
+                    <p>Add new rows to a table [citation:1][citation:10]:</p>
+                    <pre><span class="keyword">INSERT INTO</span> <span class="table">employees</span> (first_name, last_name, salary, department_id)
+<span class="keyword">VALUES</span> ('Tom', 'Reed', 70000, 1);</pre>
+                    <div class="code-caption">Adds a new employee named Tom Reed.</div>
+                </div>
+                <div class="content-block">
+                    <h3>UPDATE — Modifying Data</h3>
+                    <p>Change existing rows. <strong>Always include a WHERE clause</strong> to avoid updating everything!</p>
+                    <pre><span class="keyword">UPDATE</span> <span class="table">employees</span>
+<span class="keyword">SET</span> salary = salary * 1.10
+<span class="keyword">WHERE</span> department_id = 1;</pre>
+                    <div class="code-caption">Gives a 10% raise to all employees in department 1.</div>
+                </div>
+                <div class="content-block">
+                    <h3>DELETE — Removing Data</h3>
+                    <p>Remove rows. Again, <strong>always use WHERE</strong> unless you mean to delete everything!</p>
+                    <pre><span class="keyword">DELETE FROM</span> <span class="table">employees</span>
+<span class="keyword">WHERE</span> manager_id <span class="keyword">IS NULL</span>;</pre>
+                    <div class="code-caption">Removes employees who don't have a manager.</div>
+                </div>
+                <div class="content-block">
+                    <h3>⚠️ Important: Transactions</h3>
+                    <p>Use <code>BEGIN</code> / <code>COMMIT</code> / <code>ROLLBACK</code> to group changes together — this prevents accidental data loss [citation:4].</p>
+                </div>
+            `
+        }, {
+            id: 11,
+            chapter: "12. Table Design &amp; Normalization",
+            unit: "Unit 4 · DML &amp; Design",
+            subtitle: "Building efficient, organized databases",
+            content: `
+                <div class="content-block">
+                    <h3>Why Design Matters</h3>
+                    <p>Good database design prevents data duplication, ensures data integrity, and makes queries faster and simpler [citation:10].</p>
+                </div>
+                <div class="content-block">
+                    <h3>Normalization</h3>
+                    <p>Normalization is the process of organizing data to reduce redundancy. There are several "normal forms" (1NF, 2NF, 3NF) that provide guidelines [citation:10][citation:12].</p>
+                    <ul>
+                        <li><strong>1NF</strong> — Each column contains atomic (indivisible) values; no repeating groups.</li>
+                        <li><strong>2NF</strong> — Already in 1NF, and every non-key column depends on the entire primary key.</li>
+                        <li><strong>3NF</strong> — Already in 2NF, and no transitive dependencies (non-key columns don't depend on other non-key columns).</li>
+                    </ul>
+                </div>
+                <div class="content-block">
+                    <h3>Primary Keys &amp; Foreign Keys</h3>
+                    <ul>
+                        <li><strong>Primary Key</strong> — uniquely identifies each row (e.g., <code>id</code>).</li>
+                        <li><strong>Foreign Key</strong> — references a primary key in another table, creating a relationship.</li>
+                    </ul>
+                    <p>This is how relational databases connect data across tables [citation:4][citation:10].</p>
+                </div>
+                <div class="content-block">
+                    <h3>Entity Relationship Diagrams (ERD)</h3>
+                    <p>ERDs are visual tools for planning your database structure. They show entities (tables), attributes (columns), and relationships (how tables connect) [citation:4][citation:10].</p>
+                    <p>Before writing any SQL, it's good practice to sketch an ERD.</p>
+                </div>
+            `
+        }];
+
+        // ─── RENDER LOGIC ──────────────────────────────────────────────
+        let currentChapter = 0;
+
+        function renderLesson(index) {
+            const lesson = lessons[index];
+            if (!lesson) return;
+
+            const container = document.getElementById('lessonContainer');
+            container.innerHTML = `
+                <div class="lesson-card">
+                    <div class="breadcrumb">${lesson.unit} <span>›</span> ${lesson.chapter}</div>
+                    <h2>${lesson.chapter}</h2>
+                    <div class="subtitle">${lesson.subtitle}</div>
+                    <div class="divider"></div>
+                    ${lesson.content}
+                    <div class="lesson-nav">
+                        <a href="#" id="prevLesson" class="${index === 0 ? 'disabled' : ''}">← Previous</a>
+                        <span style="color:#8891a5;font-size:0.85rem;">${index + 1} / ${lessons.length}</span>
+                        <a href="#" id="nextLesson" class="${index === lessons.length - 1 ? 'disabled' : ''}">Next →</a>
+                    </div>
+                </div>
+            `;
+
+            // update sidebar highlighting
+            document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
+            const target = document.querySelector(`.sidebar a[data-chapter="${index}"]`);
+            if (target) target.classList.add('active');
+
+            // navigation events
+            document.getElementById('prevLesson')?.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (index > 0) renderLesson(index - 1);
+            });
+            document.getElementById('nextLesson')?.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (index < lessons.length - 1) renderLesson(index + 1);
+            });
+
+            currentChapter = index;
+            // scroll to top of lesson
+            document.getElementById('lessonContainer').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // ─── SIDEBAR CLICK ─────────────────────────────────────────────
+        document.querySelectorAll('.sidebar a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const idx = parseInt(link.dataset.chapter, 10);
+                if (!isNaN(idx)) renderLesson(idx);
+            });
+        });
+
+        // ─── INIT ──────────────────────────────────────────────────────
+        renderLesson(0);
+    </script>
+
+</body>
+</html>
